@@ -1,6 +1,6 @@
 export default function Ticker({ ticker, children, price, diff, volume }) {
   return (
-    <div className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 ">
+    <>
       <span className="text-xl font-bold">{ticker}</span>
       <div>
         <p className="">{price}</p>
@@ -12,6 +12,6 @@ export default function Ticker({ ticker, children, price, diff, volume }) {
 
       {children}
       <p>{volume} vol</p>
-    </div>
+    </>
   );
 }
