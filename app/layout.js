@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="text-white">
         <NavBar />
-        <main className="m-4">{children}</main>
+        <main className="m-4 select-none">{children}</main>
       </body>
     </html>
   );

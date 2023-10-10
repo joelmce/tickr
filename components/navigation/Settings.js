@@ -29,7 +29,7 @@ export default function Settings() {
         User Settings
       </button>
       {isOpen && (
-        <div className="absolute right-0 mt-2 bg-black border rounded shadow-lg" >
+        <div className="absolute right-0 mt-2 bg-black border rounded shadow-lg z-10" >
           <ul>
             <li className="py-2 px-4 hover:bg-slate-800 cursor-pointer">
               Account Settings

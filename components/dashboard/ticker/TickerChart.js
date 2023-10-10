@@ -18,10 +18,10 @@ export default function TickerChart({ data }) {
   };
 
   const chartOptions = {
-    maintainAspectRatio: false,
-    responsive: false,
-    width: 80,
-    height: 50,
+    maintainAspectRatio: true,
+    responsive: true,
+    width: 30,
+    height: 30,
     scales: {
       x: {
         display: false,
