@@ -26,11 +26,41 @@ Tickr is a web app designed for traders and investors to efficiently monitor sto
 ## Technology Stack:
 
 **Frontend**: HTML, CSS, JavaScript & React
+
 **Backend**: NextJS
+
 **Database**: Supabase (Postgresql)
+
 **APIs**: TBD
+
 **Authentication**: TBD
 
 ## MVP Goal:
 
 The MVP aims to provide a seamless experience for traders to track stock tickers, customize their dashboards, and share insights. It focuses on core features such as real-time data and customization options to meet the immediate needs of users. Future iterations will involve expanding the notification system and trading tools available.
+
+## Component design
+
+```xml
+<App>
+    <NavBar/>
+    <Dashboard creator="Joel" title="My dashboard">
+        <Tickers>
+            <Ticker symbol="BTC/USD">
+                <title/>
+                <graph/>
+                <information dailyOpen="" dailyClose="">
+            </Ticker>
+            <Ticker symbol="ETH/USD">
+                <title/>
+                <graph/>
+                <information dailyOpen="" dailyClose="">
+            </Ticker>
+        </Tickers>
+        <Options>
+            <save/>
+            <share/>
+        <Options/>
+    </Dashboard>
+</App>
+```
