@@ -11,13 +11,14 @@ datasource db {
 }
 
 model Dashboard {
-  id String @id @default(dbgenerated("gen_random_uuid()"))
-  user User @relation(fields: [userId], references: [id])
+  id     String   @id @default(dbgenerated("gen_random_uuid()"))
+  layout String[]
+  user   User     @relation(fields: [userId], references: [id])
   userId String
 }
 
 model User {
-  id String @id @default(dbgenerated("gen_random_uuid()"))
-  alias String 
+  id         String      @id @default(dbgenerated("gen_random_uuid()"))
+  alias      String
   dashboards Dashboard[]
 }
