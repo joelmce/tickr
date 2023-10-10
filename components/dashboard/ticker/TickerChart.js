@@ -10,7 +10,7 @@ export default function TickerChart({ data }) {
         data: data.map((item) => item.price),
         fill: true,
         borderColor: "rgba(48, 190, 42, 0.8)",
-        backgroundColor: "rgba(12, 48, 10, 0.74)",
+        backgroundColor: "rgba(12, 48, 10, 0.74)", // Dyamamic
         lineTension: 0.1,
         borderWidth: 1,
       },
@@ -18,6 +18,10 @@ export default function TickerChart({ data }) {
   };
 
   const chartOptions = {
+    maintainAspectRatio: false,
+    responsive: false,
+    width: 80,
+    height: 50,
     scales: {
       x: {
         display: false,
@@ -41,5 +45,5 @@ export default function TickerChart({ data }) {
     },
   };
 
-  return <Line data={chartData} options={chartOptions} />;
+  return <Line data={chartData} options={chartOptions}/>;
 }
