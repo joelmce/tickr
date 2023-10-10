@@ -6,7 +6,7 @@ import TickerChart from "./ticker/TickerChart";
 import { generateStockData } from "@/app/generateMockStockData";
 import { useState } from "react";
 
-export default function Dashboard({ id }) {
+export default function Dashboard({ _ }) {
     
     const originalLayout = [
         { i: "a", x: 0, y: 0, w: 1, h: 1 },
@@ -35,6 +35,7 @@ export default function Dashboard({ id }) {
                 width={1200}
                 isBounded={true}
                 isDroppable={true}
+                onLayoutChange={_layout => setLayout(_layout)}
             >
                 <div key="a" className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer">
                     <Ticker ticker={"Etheruem (ETH)"} price={"3,131.2"} diff={"3.31"} volume={"2.742b"}>
