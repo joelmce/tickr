@@ -20,9 +20,5 @@ export async function getDashboard(dashboardId) {
       return result;
     });
 
-  function dashboardLayout() {
-    return dashboard;
-  }
-
-  return { dashboardLayout };
+  return dashboard;
 }
