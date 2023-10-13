@@ -2,8 +2,9 @@
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-export default function SignUp() {
+export default function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const router = useRouter();
@@ -15,10 +16,10 @@ export default function SignUp() {
 
   const handleSignUp = async () => {
     await supabase.auth.signUp({
-      email: "joelanthony.mac@gmail.com",
-      password: "testing",
+      email,
+      password,
       options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
+        emailRedirectTo: `${location.origin}/callback`,
       },
     });
     router.refresh();
