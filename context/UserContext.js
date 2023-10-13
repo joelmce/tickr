@@ -1,13 +1,16 @@
-"use client"
+"use client";
 
-import { createContext } from 'react'
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createContext } from "react";
 
-const UserContext = createContext("")
+export const UserContext = createContext("");
 
-export default function Session({children}) {
-    return (
-        <UserContext.Provider value={"ad"}>
-            {children}
-        </UserContext.Provider>
-    )
+export default async function Session({ children }) {
+  const supabase = createClientComponentClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 }
