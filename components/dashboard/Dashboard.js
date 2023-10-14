@@ -23,7 +23,9 @@ export default function Dashboard({ _ }) {
     const stockData = generateStockData()
     return (
         <>
-            <Creator creator={"joel"} />
+            <div className="my-2 mx-1">
+                <Creator creator={"joel"} />
+            </div>
 
             <ResponsiveGridLayout
                 cols={3}
