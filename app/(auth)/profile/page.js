@@ -12,10 +12,12 @@ export default async function Profile() {
   if (!user) {
     redirect("/sign-in");
   }
+  console.log(user.data)
 
   return (
     <>
       <p>{user.email}</p>
+      <code>{user.user_metadata['alias']}</code>
     </>
   );
 }
