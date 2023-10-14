@@ -17,7 +17,6 @@ export default function SignUp() {
   const [successMsg, setSuccessMsg] = useState(null);
 
   async function handleSignUp(formData) {
-    uploadAvatar(formData.alias, formData.avatar)
     const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -45,7 +44,7 @@ export default function SignUp() {
         validationSchema={SignUpSchema}
         onSubmit={handleSignUp}
       >
-        {({ errors, touched, setFieldValue }) => (
+        {({ errors, touched }) => (
           <Form className="flex flex-col w-max">
             <label>Email</label>
             <Field className="p-1 rounded"

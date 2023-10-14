@@ -3,7 +3,6 @@
 import { useContext } from "react";
 import NavItem from "./NavItem";
 import Settings from "./Settings";
-import SignOut from "../SignOut";
 
 export default function NavBar({ user }) {
   return (
@@ -13,8 +12,8 @@ export default function NavBar({ user }) {
       </div>
       <NavItem name="Assets" href="/assets" />
       <NavItem name="Dashboards" href="/dashboards" />
-      <Settings className="float-right" />
-      {user ? <SignOut /> : ""}
+      
+      {user ? <Settings className="float-right" user={user}/> : ""}
     </nav>
   );
 }
