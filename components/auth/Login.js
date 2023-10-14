@@ -25,6 +25,14 @@ export default function Login() {
     router.refresh();
   };
 
+  const handleSignIn = async () => {
+    await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+    router.refresh();
+  };
+
   return (
     <>
       <label>
@@ -36,6 +44,7 @@ export default function Login() {
         <input type="password" onChange={updatePassword} />
       </label>
       <button onClick={handleSignUp}>Sign Up</button>
+      <button onClick={handleSignIn}>Sign In</button>
     </>
   );
 }
