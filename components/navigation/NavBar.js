@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import NavItem from "./NavItem";
 import Settings from "./Settings";
-import SignOut from "../SignOut";
 
 export default function NavBar({ user }) {
   return (
@@ -14,9 +13,9 @@ export default function NavBar({ user }) {
         <NavItem name="Dashboards" href="/dashboards" />
       </div>
       <div className="flex">
-        {user ? <SignOut /> : ""}
-        <Settings />
-      </div>
+      {user ? <Settings className="float-right" user={user}/> : ""}
+      </div>     
+      
     </nav>
   );
 }
