@@ -46,3 +46,43 @@ form {
   width: 100%;
   align-items: center;
 }
+.asset-ticker {
+  display: flex;
+  justify-content: space-between;
+  background-color: #007600;
+  width: 100%;
+  border-top: 1px solid #00B600;
+  border-left: 1px solid #00B600;
+  border-right: 1px solid #00B600;
+  color: black;
+  font-size: 20px;
+  padding: 0.2rem 0.6rem;
+}
+.asset-ticker:last-child {
+  border-bottom: 1px solid #00B600;
+}
+.asset-ticker:hover {
+  background-color: darkgreen;
+}
+.asset-container {
+  border: 2px solid white;
+  background-color: rgba(0, 79, 21, 0.4);
+}
+.asset-title {
+  padding: 0 0 5px 5px;
+  font-size: 18px;
+}
+.asset-col {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 1rem;
+}
+.asset-col:last-child {
+  border-left: 2px solid white;
+  width: 100%;
+}
+.asset-data-title {
+  margin: 0 auto;
+  font-size: 18px;
+}
