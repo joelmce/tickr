@@ -88,3 +88,9 @@ form {
   font-size: 18px;
   opacity: 80%;
 }
+.nav-item {
+  margin: 0;
+}
+.nav-item:last-of-type {
+  margin-right: 10px;
+}
