@@ -13,13 +13,9 @@ export default function NavBar({ user }) {
         <NavItem name="Dashboards" href="/dashboards" />
       </div>
       <div className="flex">
-        {user ? <SignOut /> : ""}
-        <Settings />
-      </div>
-      <NavItem name="Assets" href="/assets" />
-      <NavItem name="Dashboards" href="/dashboards" />
-      
       {user ? <Settings className="float-right" user={user}/> : ""}
+      </div>     
+      
     </nav>
   );
 }
