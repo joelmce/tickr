@@ -7,3 +7,20 @@
 body {
   background-color: #222831;
 }
+label {
+  color: #EEEEEE;
+  margin-bottom: 0.15rem;
+}
+input {
+  all: unset;
+  background-color: #1465C0;
+  color: #EEEEEE;
+  border: 1px solid #1465C0;
+}
+input:focus {
+  border: 1px solid white;
+}
+.errors {
+  color: red;
+  margin: 0.4rem;
+}

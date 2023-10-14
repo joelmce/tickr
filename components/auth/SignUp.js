@@ -3,6 +3,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
+import Button from "@mui/material/Button";
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -28,7 +29,7 @@ export default function SignUp() {
   }
 
   return (
-    <>
+    <div className="p-2">
       <Formik
         initialValues={{
           email: "",
@@ -38,28 +39,28 @@ export default function SignUp() {
         onSubmit={signUp}
       >
         {({ errors, touched }) => (
-          <Form>
+          <Form className="flex flex-col w-max">
             <label>Email</label>
-            <Field
+            <Field className="p-1 rounded"
               id="email"
               name="email"
               placeholder="test@test.com"
               type="email"
             />
-            {errors.email && touched.email ? <div>{errors.email}</div> : null}
+            {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
 
             <label>Password</label>
-            <Field id="password" name="password" type="password" />
+            <Field className="p-1 rounded" id="password" name="password" type="password" />
             {errors.password && touched.password ? (
-              <div>{errors.password}</div>
+              <div className="errors">{errors.password}</div>
             ) : null}
 
-            <button type="submit">Submit</button>
+            <Button variant="contained" type="submit" className="my-5">Submit</Button>
           </Form>
         )}
       </Formik>
       {errorMsg && <p>{errorMsg}</p>}
       {successMsg && <p>{successMsg}</p>}
-    </>
+    </div>
   );
 }
