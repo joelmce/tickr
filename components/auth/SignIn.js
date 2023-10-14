@@ -26,37 +26,49 @@ export default function SignIn() {
   }
 
   return (
-    <div className="p-2">
-      <Formik
-        initialValues={{
-          email: "",
-          password: "",
-        }}
-        validationSchema={SignInSchema}
-        onSubmit={signIn}
-      >
-        {({ errors, touched }) => (
-          <Form className="flex flex-col w-max">
-            <label>Email</label>
-            <Field className="p-1 rounded"
-              id="email"
-              name="email"
-              placeholder="test@test.com"
-              type="email"
-            />
-            {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
+    <div className="auth-container">
+      <div className="auth-form rounded">
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          validationSchema={SignInSchema}
+          onSubmit={signIn}
+        >
+          {({ errors, touched }) => (
+            <Form className="flex flex-col w-max">
+              <label>Email</label>
+              <Field
+                className="p-1 rounded"
+                id="email"
+                name="email"
+                placeholder="test@test.com"
+                type="email"
+              />
+              {errors.email && touched.email ? (
+                <div className="errors">{errors.email}</div>
+              ) : null}
 
-            <label>Password</label>
-            <Field className="p-1 rounded" id="password" name="password" type="password" />
-            {errors.password && touched.password ? (
-              <div className="errors">{errors.password}</div>
-            ) : null}
+              <label>Password</label>
+              <Field
+                className="p-1 rounded"
+                id="password"
+                name="password"
+                type="password"
+              />
+              {errors.password && touched.password ? (
+                <div className="errors">{errors.password}</div>
+              ) : null}
 
-              <Button variant="contained" type="submit" className="my-5">Log in</Button>
-          </Form>
-        )}
-      </Formik>
-      {errorMsg && <p>{errorMsg}</p>}
+              <Button variant="contained" type="submit" className="my-5">
+                Log in
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        {errorMsg && <p>{errorMsg}</p>}
+      </div>
     </div>
   );
 }
