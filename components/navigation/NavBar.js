@@ -13,7 +13,14 @@ export default function NavBar({ user }) {
         <NavItem name="Dashboards" href="/dashboards" />
       </div>
       <div className="flex">
-      {user ? <Settings className="float-right" user={user}/> : ""}
+        {user ? 
+          <Settings className="float-right" user={user}/> 
+        : (
+          <>
+            <NavItem name="Login" href="/sign-in"/>
+            <NavItem name="Signup" href='/sign-up'/>
+          </>
+        )}
       </div>     
       
     </nav>

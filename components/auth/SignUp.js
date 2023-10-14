@@ -35,25 +35,6 @@ export default function SignUp() {
   }
 
   return (
-    <div className="p-2">
-      <Formik
-        initialValues={{
-          email: "",
-          password: "",
-        }}
-        validationSchema={SignUpSchema}
-        onSubmit={handleSignUp}
-      >
-        {({ errors, touched }) => (
-          <Form className="flex flex-col w-max">
-            <label>Email</label>
-            <Field className="p-1 rounded"
-              id="email"
-              name="email"
-              placeholder="test@test.com"
-              type="email"
-            />
-            {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
     <div className="auth-container">
       <div className="auth-form rounded">
         <Formik
