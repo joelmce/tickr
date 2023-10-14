@@ -34,7 +34,7 @@ export default function Dashboard({ _ }) {
         maxRows={4}
         rowHeight={284}
         margin={[25, 25]}
-        width={1200}
+        width={1100}
         isBounded={true}
         isDroppable={true}
         onLayoutChange={(_layout) => setLayout(_layout)}
