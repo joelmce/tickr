@@ -10,6 +10,7 @@ body {
 label {
   color: #EEEEEE;
   margin-bottom: 0.15rem;
+  margin-top: 0.3rem;
 }
 input {
   all: unset;
@@ -23,4 +24,73 @@ input:focus {
 .errors {
   color: red;
   margin: 0.4rem;
+}
+.auth-form {
+  scale: 120%;
+  border: 2px solid #1465C0;
+  display: flex;
+  margin: 7rem auto;
+  justify-content: center;
+  width: max-content;
+  padding: 3rem 2rem;
+  background-color: #1F252D;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+form {
+  scale: 103%;
+}
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+}
+.asset-ticker {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 118, 0, 0.8);
+  width: 100%;
+  border-top: 1px solid rgba(0, 182, 0, 0.4);
+  border-left: 1px solid rgba(0, 182, 0, 0.4);
+  border-right: 1px solid rgba(0, 182, 0, 0.4);
+  color: black;
+  font-size: 20px;
+  padding: 0.2rem 0.6rem;
+}
+.asset-ticker:last-child {
+  border-bottom: 1px solid rgba(0, 182, 0, 0.4);
+}
+.asset-ticker:hover {
+  background-color: darkgreen;
+}
+.asset-container {
+  border: 2px solid rgba(0, 182, 0, 0.4);
+  background-color: rgba(0, 79, 21, 0.2);
+}
+.asset-title {
+  padding: 0 0 5px 5px;
+  font-size: 18px;
+  opacity: 80%;
+}
+.asset-col {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 1rem;
+}
+.asset-col:last-child {
+  border-left: 2px solid rgba(0, 182, 0, 0.4);
+  width: 100%;
+}
+.asset-data-title {
+  margin: 0 auto;
+  font-size: 18px;
+  opacity: 80%;
+}
+.nav-item {
+  margin: 0;
+}
+.nav-item:last-of-type {
+  margin-right: 10px;
 }

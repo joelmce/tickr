@@ -1,5 +1,5 @@
 "use client";
-import {useEffect, useRef, useState} from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -7,20 +7,12 @@ export default function Settings({ user }) {
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef(null)
 
-    useEffect(() => {
-        document.addEventListener('mousedown', toggleDropdown)
-        return () => {
-            document.removeEventListener('mousedown', toggleDropdown)
-        }
-    })
-
-    const toggleDropdown = (e) => {
-        if (ref.current && !ref.current.contains(e.target)) {
-            setIsOpen(false)
-        } else {
-            setIsOpen(true)
-        }
+  useEffect(() => {
+    document.addEventListener("mousedown", toggleDropdown);
+    return () => {
+      document.removeEventListener("mousedown", toggleDropdown);
     };
+  });
 
     const supabase = createClientComponentClient();
 
@@ -65,5 +57,7 @@ export default function Settings({ user }) {
                 </div>
             )}
         </div>
-    );
+      )}
+    </div>
+  );
 }
