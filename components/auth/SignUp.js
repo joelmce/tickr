@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string().required("Required"),
-  alias: Yup.string().required('Required')
+  alias: Yup.string().required("Required"),
 });
 
 export default function SignUp() {
@@ -23,8 +23,8 @@ export default function SignUp() {
       options: {
         data: {
           alias: formData.alias,
-        }
-      }
+        },
+      },
     });
 
     if (error) {
@@ -54,25 +54,61 @@ export default function SignUp() {
               type="email"
             />
             {errors.email && touched.email ? <div className="errors">{errors.email}</div> : null}
+    <div className="auth-container">
+      <div className="auth-form rounded">
+        <Formik
+          initialValues={{
+            email: "",
+            password: "",
+          }}
+          validationSchema={SignUpSchema}
+          onSubmit={handleSignUp}
+        >
+          {({ errors, touched }) => (
+            <Form className="flex flex-col w-max">
+              <label>Email</label>
+              <Field
+                className="p-1 rounded"
+                id="email"
+                name="email"
+                placeholder="test@test.com"
+                type="email"
+              />
+              {errors.email && touched.email ? (
+                <div className="errors">{errors.email}</div>
+              ) : null}
 
-            <label>Password</label>
-            <Field className="p-1 rounded" id="password" name="password" type="password" />
-            {errors.password && touched.password ? (
-              <div className="errors">{errors.password}</div>
-            ) : null}
+              <label>Password</label>
+              <Field
+                className="p-1 rounded"
+                id="password"
+                name="password"
+                type="password"
+              />
+              {errors.password && touched.password ? (
+                <div className="errors">{errors.password}</div>
+              ) : null}
 
-            <label>Alias</label>
-            <Field className="p-1 rounded" id="alias" name="alias" type="text"/> 
-            {errors.alias && touched.alias ? (
-              <div className="errors">{errors.alias}</div>
-            ) : null}
+              <label>Alias</label>
+              <Field
+                className="p-1 rounded"
+                id="alias"
+                name="alias"
+                type="text"
+              />
+              {errors.alias && touched.alias ? (
+                <div className="errors">{errors.alias}</div>
+              ) : null}
 
-            <Button variant="contained" type="submit" className="my-5">Submit</Button>
-          </Form>
-        )}
-      </Formik>
-      {errorMsg && <p>{errorMsg}</p>}
-      {successMsg && <p>{successMsg}</p>}
+              <Button variant="contained" type="submit" className="my-5">
+                Submit
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        {errorMsg && <p>{errorMsg}</p>}
+        {successMsg && <p>{successMsg}</p>}
+      </div>
     </div>
   );
 }
