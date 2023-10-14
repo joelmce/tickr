@@ -51,26 +51,27 @@ form {
   justify-content: space-between;
   background-color: #007600;
   width: 100%;
-  border-top: 1px solid #00B600;
-  border-left: 1px solid #00B600;
-  border-right: 1px solid #00B600;
+  border-top: 1px solid rgba(0, 182, 0, 0.4);
+  border-left: 1px solid rgba(0, 182, 0, 0.4);
+  border-right: 1px solid rgba(0, 182, 0, 0.4);
   color: black;
   font-size: 20px;
   padding: 0.2rem 0.6rem;
 }
 .asset-ticker:last-child {
-  border-bottom: 1px solid #00B600;
+  border-bottom: 1px solid rgba(0, 182, 0, 0.4);
 }
 .asset-ticker:hover {
   background-color: darkgreen;
 }
 .asset-container {
-  border: 2px solid white;
+  border: 2px solid rgba(0, 182, 0, 0.4);
   background-color: rgba(0, 79, 21, 0.4);
 }
 .asset-title {
   padding: 0 0 5px 5px;
   font-size: 18px;
+  opacity: 80%;
 }
 .asset-col {
   display: flex;
@@ -79,10 +80,11 @@ form {
   padding: 1rem;
 }
 .asset-col:last-child {
-  border-left: 2px solid white;
+  border-left: 2px solid rgba(0, 182, 0, 0.4);
   width: 100%;
 }
 .asset-data-title {
   margin: 0 auto;
   font-size: 18px;
+  opacity: 80%;
 }
