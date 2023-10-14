@@ -34,9 +34,10 @@ input:focus {
   width: max-content;
   padding: 3rem 2rem;
   background-color: #1F252D;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 form {
-  scale: 105%;
+  scale: 103%;
 }
 .auth-container {
   display: flex;
