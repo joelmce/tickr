@@ -6,15 +6,23 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 export default function Settings({ user }) {
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef(null)
-
-  useEffect(() => {
-    document.addEventListener("mousedown", toggleDropdown);
-    return () => {
-      document.removeEventListener("mousedown", toggleDropdown);
-    };
-  });
-
     const supabase = createClientComponentClient();
+
+    useEffect(() => {
+        document.addEventListener("mousedown", toggleDropdown);
+        return () => {
+        document.removeEventListener("mousedown", toggleDropdown);
+        };
+    });
+
+    const toggleDropdown = (e) => {
+        if (ref.current && !ref.current.contains(e.target)) {
+          setIsOpen(false);
+        } else {
+          setIsOpen(true);
+        }
+      };
+
 
     async function handleSignOut() {
         const { error } = await supabase.auth.signOut();
@@ -58,6 +66,4 @@ export default function Settings({ user }) {
             )}
         </div>
       )}
-    </div>
-  );
-}
+      
