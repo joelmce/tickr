@@ -1,12 +1,12 @@
 "use client";
 import ResponsiveGridLayout from "react-grid-layout";
 import Creator from "./Creator";
-import Ticker from "./ticker/Ticker";
-import TickerChart from "./ticker/TickerChart";
+import Ticker from "../ticker/Ticker";
+import TickerChart from "../ticker/TickerChart";
 import { generateStockData } from "@/app/generateMockStockData";
 import { useState } from "react";
 
-export default function Dashboard({ _ }) {
+export default function Dashboard({ metadata }) {
   const originalLayout = [
     { i: "a", x: 0, y: 0, w: 1, h: 1 },
     { i: "b", x: 1, y: 0, w: 1, h: 1 },
@@ -24,7 +24,7 @@ export default function Dashboard({ _ }) {
     <>
       <div className="mx-6">
         <h1 className="pl-1 mb-2 font-bold text-xl">Dashboard</h1>
-        <Creator creator={"joel"} />
+        <Creator creator={metadata.creator} />
       </div>
 
       <ResponsiveGridLayout

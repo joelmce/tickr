@@ -22,7 +22,6 @@ export default async function RootLayout({ children }) {
   } = await supabase.auth.getSession();
 
   const accessToken = session?.access_token || null;
-  console.log(session);
 
   return (
     <html lang="en">
