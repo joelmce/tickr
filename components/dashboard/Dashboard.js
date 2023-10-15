@@ -23,7 +23,8 @@ export default function Dashboard({ metadata }) {
   return (
     <>
       <div className="mx-6">
-        <h1 className="pl-1 mb-2 font-bold text-xl">Dashboard</h1>
+        <h1 className="pl-1 mb-2 font-bold text-xl">{metadata.name}</h1>
+        <p className="my-4">{metadata.description}</p>
         <Creator creator={metadata.creator} />
       </div>
 

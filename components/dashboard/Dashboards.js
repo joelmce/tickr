@@ -1,7 +1,10 @@
 'use client'
 
+import { Stack } from "@mui/material"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/navigation"
+import DashboardItem from "./DashboardItem"
+import NewDashboard from "./NewDashboard"
 
 export default function Dashboards({ dashboards }) {
 
@@ -17,17 +20,14 @@ export default function Dashboards({ dashboards }) {
 
     return (
         <>
-            {dashboards.map((item) => {
-                console.log(item.dashboard_id)
-                return (
-                    <>
-                        <li key={item.dashboard_id}>{item.name}
-                            <button className="bg-red-800 p-2" onClick={() => deleteDashboard(item.dashboard_id)}>Delete</button>
-                        </li>
-                        
-                    </>
-                )
-            })}
+            
+            <section>
+                {dashboards.map((item) => {
+                    <Stack spacing={4}>
+                        <DashboardItem metadata={item}/>
+                    </Stack>
+                })}
+            </section>
         </>
     )
 }
