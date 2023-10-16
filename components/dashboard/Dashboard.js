@@ -5,6 +5,7 @@ import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
 import { generateStockData } from "@/app/generateMockStockData";
 import { useState } from "react";
+import AddToFavourite from "./AddToFavourite";
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -26,6 +27,7 @@ export default function Dashboard({ metadata }) {
         <h1 className="pl-1 mb-2 font-bold text-xl">{metadata.name}</h1>
         <p className="my-4">{metadata.description}</p>
         <Creator creator={metadata.creator} />
+        <AddToFavourite/>
       </div>
 
       <ResponsiveGridLayout
