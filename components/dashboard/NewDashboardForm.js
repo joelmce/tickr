@@ -34,6 +34,8 @@ export default function NewDashboardForm() {
     if (error) {
       setErrorMsg(error.message);
     }
+
+    router.replace(`/dashboards/${data[0].dashboard_id}`);
   }
 
   return (
