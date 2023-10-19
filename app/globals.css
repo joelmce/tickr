@@ -4,19 +4,23 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono&display=swap");
 
+:root {
+  font-family: "Roboto Mono", sans-serif;
+}
+
 body {
-  background-color: #222831;
+  background-color: black;
 }
 label {
-  color: #EEEEEE;
+  color: #eeeeee;
   margin-bottom: 0.15rem;
   margin-top: 0.3rem;
 }
 input {
   all: unset;
-  background-color: #1465C0;
-  color: #EEEEEE;
-  border: 1px solid #1465C0;
+  background-color: #1465c0;
+  color: #eeeeee;
+  border: 1px solid #1465c0;
 }
 input:focus {
   border: 1px solid white;
@@ -27,13 +31,13 @@ input:focus {
 }
 .auth-form {
   scale: 120%;
-  border: 2px solid #1465C0;
+  border: 2px solid #1465c0;
   display: flex;
   margin: 7rem auto;
   justify-content: center;
   width: max-content;
   padding: 3rem 2rem;
-  background-color: #1F252D;
+  background-color: #1f252d;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 form {

@@ -27,15 +27,15 @@ export default function Dashboard({ metadata }) {
         <h1 className="pl-1 mb-2 font-bold text-xl">{metadata.name}</h1>
         <p className="my-4">{metadata.description}</p>
         <Creator creator={metadata.creator} />
-        <AddToFavourite/>
+        <AddToFavourite />
       </div>
 
       <ResponsiveGridLayout
-        cols={3}
+        cols={4}
         layout={layout}
         compactType="horizontal"
         maxRows={4}
-        rowHeight={284}
+        rowHeight={175}
         margin={[25, 25]}
         width={1100}
         isBounded={true}
@@ -44,7 +44,7 @@ export default function Dashboard({ metadata }) {
       >
         <div
           key="a"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
+          className="rounded border border-[#164914] w-fit p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
         >
           <Ticker
             ticker={"Etheruem (ETH)"}

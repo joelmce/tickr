@@ -9,7 +9,6 @@ export default async function getDashboard(id) {
     .eq("dashboard_id", id);
 
   if (error) return error.message;
-  console.log(data, error);
 
   return data;
 }
