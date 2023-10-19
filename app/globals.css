@@ -4,10 +4,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono&display=swap");
 
-:root {
-  font-family: "Roboto Mono", sans-serif;
-}
-
 body {
   background-color: black;
 }

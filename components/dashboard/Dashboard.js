@@ -44,7 +44,7 @@ export default function Dashboard({ metadata }) {
       >
         <div
           key="a"
-          className="rounded border border-[#164914] w-fit p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
+          className="rounded border border-[#164914] p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
         >
           <Ticker
             ticker={"Etheruem (ETH)"}

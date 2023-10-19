@@ -1,10 +1,10 @@
 export default function Ticker({ ticker, children, price, diff, volume }) {
   return (
     <>
-      <span className="text-xl font-bold">{ticker}</span>
+      <span className="font-bold">{ticker}</span>
       <div>
-        <p className="">{price}</p>
-        <p className="text-green-500" 
+        <p className="text-xs">{price}</p>
+        <p className="text-xs font-bold" 
         style={{
           color: diff < 0 ? 'red' : 'green'
         }}>{diff}%</p>
