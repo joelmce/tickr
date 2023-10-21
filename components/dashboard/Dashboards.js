@@ -24,11 +24,7 @@ export default function Dashboards({ dashboards }) {
     <>
       <section>
         {dashboards.map((item) => {
-          return (
-            <Stack spacing={4}>
-              <DashboardItem metadata={item} />
-            </Stack>
-          );
+          return <DashboardItem key={item.dashboard_id} metadata={item} />;
         })}
       </section>
     </>
