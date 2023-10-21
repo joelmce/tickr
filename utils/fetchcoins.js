@@ -8,8 +8,6 @@ async function fetchTopCoins() {
         vs_currency: "usd",
         order: "market_cap_desc",
         sparkline: false,
-        market_dominance: false,
-        percent_change: false,
       },
     },
   );
@@ -21,7 +19,13 @@ async function fetchTopCoins() {
     )
     .slice(0, 10)
     .forEach((coin) => {
-      fetchedPrices[coin.symbol] = coin.current_price;
+      console.log(coin);
+      fetchedPrices[coin.symbol] = {
+        name: coin.name,
+        current_price: coin.current_price,
+        price_change_percentage_24h: coin.price_change_percentage_24h,
+        total_volume: coin.total_volume,
+      };
     });
 
   return fetchedPrices;

@@ -53,9 +53,19 @@ export default function Dashboard({ metadata }) {
         isDroppable={true}
         onLayoutChange={(_layout) => setLayout(_layout)}
       >
-        {topCoins.map(([ticker, price], index) => {
+        {topCoins.map(([ticker, coinData], index) => {
           const layoutItem = originalLayout[index];
           if (!layoutItem) return null;
+
+          const {
+            name,
+            current_price,
+            price_change_percentage_24h,
+            total_volume,
+          } = coinData;
+
+          console.log(topCoins);
+
           return (
             <div
               key={layoutItem.i}
@@ -63,10 +73,10 @@ export default function Dashboard({ metadata }) {
               data-grid={layoutItem}
             >
               <Ticker
-                ticker={ticker}
-                price={price}
-                diff={"3.31"}
-                volume={"2.742b"}
+                ticker={name}
+                price={current_price}
+                diff={price_change_percentage_24h.toFixed(2)}
+                volume={total_volume.toLocaleString()}
               >
                 <TickerChart data={stockData} />
               </Ticker>
