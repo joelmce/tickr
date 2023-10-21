@@ -4,8 +4,9 @@ import Creator from "./Creator";
 import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
 import { generateStockData } from "@/app/generateMockStockData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
+import { fetchTopCoins } from "@/utils/fetchcoins";
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -19,8 +20,18 @@ export default function Dashboard({ metadata }) {
   ];
 
   const [layout, setLayout] = useState(originalLayout);
+  const [coinPrices, setCoinPrices] = useState({});
+
+  useEffect(() => {
+    fetchTopCoins().then((prices) => {
+      setCoinPrices(prices);
+    });
+  }, []);
+
+  const topCoins = Object.entries(coinPrices);
 
   const stockData = generateStockData();
+
   return (
     <>
       <div className="mx-6">
@@ -42,97 +53,26 @@ export default function Dashboard({ metadata }) {
         isDroppable={true}
         onLayoutChange={(_layout) => setLayout(_layout)}
       >
-        <div
-          key="a"
-          className="rounded border border-[#164914] p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Etheruem (ETH)"}
-            price={"3,131.2"}
-            diff={"3.31"}
-            volume={"2.742b"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="b"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Bitcoin (BTC)"}
-            price={"17,203.7"}
-            diff={"-14"}
-            volume={"6.412b"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="c"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Dogecoin (DOGE)"}
-            price={"0.00031"}
-            diff={"11.3"}
-            volume={"104.2m"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="d"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Dogecoin (DOGE)"}
-            price={"0.00031"}
-            diff={"11.3"}
-            volume={"104.2m"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="e"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Dogecoin (DOGE)"}
-            price={"0.00031"}
-            diff={"11.3"}
-            volume={"104.2m"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="f"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Dogecoin (DOGE)"}
-            price={"0.00031"}
-            diff={"11.3"}
-            volume={"104.2m"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
-        <div
-          key="g"
-          className="rounded border border-[#164914] w-fit p-4 bg-[#0E300D] shadow-md opacity-80 cursor-pointer"
-        >
-          <Ticker
-            ticker={"Dogecoin (DOGE)"}
-            price={"0.00031"}
-            diff={"11.3"}
-            volume={"104.2m"}
-          >
-            <TickerChart data={stockData} />
-          </Ticker>
-        </div>
+        {topCoins.map(([ticker, price], index) => {
+          const layoutItem = originalLayout[index];
+          if (!layoutItem) return null;
+          return (
+            <div
+              key={layoutItem.i}
+              className="rounded border border-[#164914] p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
+              data-grid={layoutItem}
+            >
+              <Ticker
+                ticker={ticker}
+                price={price}
+                diff={"3.31"}
+                volume={"2.742b"}
+              >
+                <TickerChart data={stockData} />
+              </Ticker>
+            </div>
+          );
+        })}
       </ResponsiveGridLayout>
     </>
   );

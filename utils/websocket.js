@@ -1,7 +1,9 @@
 const { fetchTopCoins } = require("@/utils/fetchcoins.js");
 const WebSocket = require("ws");
+import { EventEmitter } from "events";
 
 let prices = {};
+const priceEmitter = new EventEmitter();
 
 async function setupWebSocketConnections() {
   try {
@@ -20,6 +22,8 @@ async function setupWebSocketConnections() {
         prices[coin] = data.c;
         console.clear();
         console.log(prices);
+
+        priceEmitter.emit("pricesUpdated", prices);
       };
 
       socket.onerror = (error) => {
@@ -41,4 +45,4 @@ async function setupWebSocketConnections() {
 }
 setupWebSocketConnections();
 
-export { prices };
+export { prices, priceEmitter };
