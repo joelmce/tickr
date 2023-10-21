@@ -75,8 +75,8 @@ export default function Dashboard({ metadata }) {
               <Ticker
                 ticker={name}
                 price={current_price}
-                diff={price_change_percentage_24h.toFixed(2)}
-                volume={total_volume.toLocaleString()}
+                diff={price_change_percentage_24h}
+                volume={total_volume}
               >
                 <TickerChart data={stockData} />
               </Ticker>
