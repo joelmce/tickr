@@ -19,18 +19,18 @@ export default function Assets() {
       <div className="asset-container flex shadow-md rounded">
         <div className="asset-col">
           <p className="asset-title">Top 10 Cryptocurrencies by Marketcap</p>
-          {topCoins.map(([ticker, price], index) => {
+          {topCoins.map(([ticker, coinData], index) => {
             return (
               <div
                 className="asset-ticker shadow-md first-of-type:rounded-tl first-of-type:rounded-tr last-of-type:rounded-bl last-of-type:rounded-br cursor-pointer opacity-80"
                 key={index}
               >
-                <p className="ticker-name">{ticker}</p>
+                <p className="ticker-name">{coinData.name}</p>
                 <p className="ticker-price">
                   {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "USD",
-                  }).format(price)}
+                  }).format(coinData.current_price)}
                 </p>
               </div>
             );
