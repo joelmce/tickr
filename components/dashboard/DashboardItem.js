@@ -1,12 +1,11 @@
-import { Paper } from "@mui/material";
-import styled from "@mui/material/styles";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function DashboardItem({ metadata }) {
-  const { id, name, description, creator } = metadata;
+  const { id, name, description, creator, dashboard_id } = metadata;
+  const router = useRouter();
 
   const goToDashboard = () => {
-    redirect("/" + id);
+    redirect("/dashboards/" + dashboard_id);
   };
 
   return (
