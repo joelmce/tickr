@@ -11,7 +11,7 @@ export default function Assets() {
     });
   }, []);
 
-  const topCoins = Object.entries(coinPrices).slice(0, 20);
+  const topCoins = Object.entries(coinPrices);
 
   return (
     <>

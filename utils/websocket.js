@@ -18,6 +18,8 @@ async function setupWebSocketConnections() {
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         prices[coin] = data.c;
+        console.clear();
+        console.log(prices);
       };
 
       socket.onerror = (error) => {
