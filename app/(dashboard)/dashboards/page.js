@@ -3,7 +3,7 @@ import NewDashboard from "@/components/dashboard/NewDashboard";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { supabase } from "@/supabase/supabaseClient";
 
 export default async function Page() {
   const supabase = createServerComponentClient({ cookies });
@@ -14,7 +14,6 @@ export default async function Page() {
   if (!user) {
     redirect("/sign-in");
   }
-
   const getDashboards = async () => {
     const { data: dashboard, error } = await supabase
       .from("Dashboards")
@@ -35,7 +34,7 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className="text-3xl">Dashboard</h1>
+      <h1 className="text-3xl">Your Dashboards</h1>
       <a href="/dashboards/new" className="bg-green-700 p-2 my-4 rounded">
         New Dashboard
       </a>

@@ -1,10 +1,8 @@
 "use client";
 
-import { Stack } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import DashboardItem from "./DashboardItem";
-import NewDashboard from "./NewDashboard";
 
 export default function Dashboards({ dashboards }) {
   const supabase = createClientComponentClient();
@@ -22,7 +20,7 @@ export default function Dashboards({ dashboards }) {
 
   return (
     <>
-      <section>
+      <section className="mt-4 flex flex-col gap-4">
         {dashboards.map((item) => {
           return <DashboardItem key={item.dashboard_id} metadata={item} />;
         })}

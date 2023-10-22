@@ -3,14 +3,14 @@ import "./globals.css";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthProvider from "@/components/AuthProvider";
-import { Inconsolata } from 'next/font/google'
+import { Inconsolata } from "next/font/google";
 
 export const metadata = {
   title: "Tickr",
   description: "",
 };
 
-const roboto = Inconsolata({ weight: '300',subsets: ['latin']})
+const roboto = Inconsolata({ weight: "300", subsets: ["latin"] });
 
 export const revalidate = 0;
 
@@ -28,7 +28,7 @@ export default async function RootLayout({ children }) {
       <body className="text-white">
         <AuthProvider accessToken={accessToken}>
           <NavBar user={session?.user} />
-          <main className="m-4 select-none">{children}</main>
+          <main className="mx-14 my-14 select-none">{children}</main>
         </AuthProvider>
       </body>
     </html>

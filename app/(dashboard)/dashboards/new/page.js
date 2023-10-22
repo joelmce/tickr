@@ -1,10 +1,9 @@
-import NewDashboardForm from "@/components/dashboard/NewDashboardForm";
-import MultiStepForm from "@/components/forms/MultiStepForm";
+import NewDashboardForm from "@/components/forms/NewDashboardForm";
 
 export default function Page() {
-    return (
-        <section>
-            <MultiStepForm/>
-        </section>
-    )
+  return (
+    <section>
+      <NewDashboardForm />
+    </section>
+  );
 }
