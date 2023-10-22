@@ -5,7 +5,7 @@ export default function DashboardItem({ metadata }) {
   const router = useRouter();
 
   const goToDashboard = () => {
-    redirect("/dashboards/" + dashboard_id);
+    router.refresh("/dashboards/" + dashboard_id);
   };
 
   return (

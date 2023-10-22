@@ -9,7 +9,15 @@ export function Step1({ nextStep }) {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>Step 1</h2>
+            <h2>Tell us about your dashboard.</h2>
+            <label>
+                Title
+                <input name="name" type="text"/>
+            </label>
+            <label>
+                Description
+                <input name="description" type="text" placeholder="Optional"/>
+            </label>
             <button type="submit">Next</button>
         </form>
     )
