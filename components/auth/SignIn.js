@@ -3,7 +3,9 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
-import Button from "@mui/material/Button";
+import {Button} from "@mui/joy";
+import { Card } from "@mui/joy";
+import { CardContent } from "@mui/joy";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -26,8 +28,15 @@ export default function SignIn() {
   }
 
   return (
-    <div className="auth-container">
-      <div className="auth-form rounded">
+    
+    <Card 
+    color="success"
+    invertedColors
+    orientation="vertical"
+    variant="outlined"
+    sx={{ bgcolor: 'black', "--Card-padding": "30px"}}
+    className="w-fit">
+      <CardContent className="m-auto">
         <Formik
           initialValues={{
             email: "",
@@ -61,14 +70,14 @@ export default function SignIn() {
                 <div className="errors">{errors.password}</div>
               ) : null}
 
-              <Button variant="contained" type="submit" className="my-5">
+              <Button variant="solid" color="success" className="my-5">
                 Log in
               </Button>
             </Form>
           )}
         </Formik>
         {errorMsg && <p>{errorMsg}</p>}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
