@@ -19,9 +19,9 @@ async function fetchTopCoins() {
     )
     .slice(0, 10)
     .forEach((coin) => {
-      fetchedPrices[coin.symbol] = coin.current_price;
-      console.log(coin);
       fetchedPrices[coin.symbol] = {
+        market_cap: coin.market_cap,
+        img: coin.image,
         name: coin.name,
         current_price: coin.current_price,
         price_change_percentage_24h: coin.price_change_percentage_24h,
