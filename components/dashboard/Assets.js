@@ -53,19 +53,29 @@ export default function Assets() {
                 <strong>Name:</strong> {selectedTicker.name}
               </p>
               <p>
-                <strong>Price:</strong> {selectedTicker.current_price}
+                <strong>Price:</strong>{" "}
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(selectedTicker.current_price)}
               </p>
               <p>
                 <strong>24Hr:</strong>{" "}
                 {selectedTicker.price_change_percentage_24h.toFixed(1)}%
               </p>
               <p>
-                <strong>Marketcap:</strong> {selectedTicker.market_cap}
+                <strong>Marketcap:</strong>{" "}
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(selectedTicker.market_cap)}
               </p>
               <p>
                 <strong>Total Vol:</strong>
-                {" $"}
-                {selectedTicker.total_volume}
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(selectedTicker.total_volume)}
               </p>
               {/* Placeholder for the chart */}
               <div className="chart-placeholder bg-black mt-4 shadow-md h-72 rounded-lg">
