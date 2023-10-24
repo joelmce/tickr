@@ -11,5 +11,11 @@ export default async function SignInPage() {
     redirect("/");
   }
 
-  return <SignIn />;
+  return(
+    <section className="flex items-center justify-center">
+      <SignIn />
+    </section>
+  )
+  
+  
 }

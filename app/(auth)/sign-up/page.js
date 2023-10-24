@@ -8,8 +8,12 @@ export default async function SignUpPage() {
   const { data } = await supabase.auth.getSession();
 
   if (data?.session) {
-    redirect("/");
+    redirect("/dashboards");
   }
 
-  return <SignUp />;
+  return (
+    <section className="flex items-center justify-center">
+      <SignUp />
+    </section>
+  );
 }

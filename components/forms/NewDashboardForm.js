@@ -1,9 +1,10 @@
 "use client";
 import { ErrorSharp } from "@mui/icons-material";
+import { Card, CardContent, Input, Typography } from "@mui/joy";
 import { Button } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Field, Form, Formik } from "formik";
-import { redirect, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 
@@ -39,7 +40,10 @@ export default function NewDashboardForm() {
   }
 
   return (
-    <div>
+    <Card variant="outlined"  className="card-container">
+      <CardContent>
+
+      
       <Formik
         initialValues={{
           name: "",
@@ -49,14 +53,14 @@ export default function NewDashboardForm() {
         onSubmit={newDashboard}
       >
         {({ errors, touched }) => (
-          <Form>
-            <label>Title</label>
+          <Form className="flex flex-col">
+            <Typography level="title-md" className="text-white">Dashboard title</Typography>
             <Field className="p-1 rounded" id="title" type="text" name="name" />
             {errors.name && touched.name ? (
               <div className="errors">{errors.name}</div>
             ) : null}
 
-            <label>description</label>
+            <Typography level="title-md" className="text-white">Description</Typography>
             <Field
               className="p-1 rounded"
               id="description"
@@ -70,7 +74,7 @@ export default function NewDashboardForm() {
             <Button
               variant="contained"
               type="submit"
-              className="my-5 p-2 bg-green-500 rounded"
+              className="my-5 p-2 bg-green-700 rounded hover:bg-green-800"
             >
               Create Dashboard
             </Button>
@@ -78,6 +82,7 @@ export default function NewDashboardForm() {
         )}
       </Formik>
       {errorMsg && <p>{errorMsg}</p>}
-    </div>
+      </CardContent>
+    </Card>
   );
 }

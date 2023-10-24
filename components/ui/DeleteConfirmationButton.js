@@ -1,12 +1,15 @@
+'use client'
 import { DeleteForever, WarningRounded } from "@mui/icons-material";
 import { DialogActions, DialogContent, Divider, Modal, ModalDialog } from "@mui/joy";
 import Button from "@mui/joy/Button";
 import { DialogTitle } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function DeleteConfirmationButton({ name, dashboard_id }) {
     const [open, setOpen] = useState(false);
+    const router = useRouter()
 
     const handleDelete = async() => {
         setOpen(false)

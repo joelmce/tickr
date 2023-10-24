@@ -1,9 +1,9 @@
-import NewDashboardForm from "@/components/forms/NewDashboardForm";
+import NewDashboardForm from "@/components/forms/NewDashboardForm";;
 
 export default function Page() {
-  return (
-    <section>
-      <NewDashboardForm />
-    </section>
-  );
+    return (
+        <section className="flex">
+            <NewDashboardForm/>
+        </section>
+    )
 }

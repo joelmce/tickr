@@ -3,9 +3,9 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
-import {Button} from "@mui/joy";
 import { Card } from "@mui/joy";
 import { CardContent } from "@mui/joy";
+import { useRouter } from "next/navigation";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -15,6 +15,7 @@ const SignInSchema = Yup.object().shape({
 export default function SignIn() {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
+  const router = useRouter()
 
   async function signIn(formData) {
     const { error } = await supabase.auth.signInWithPassword({
@@ -25,6 +26,8 @@ export default function SignIn() {
     if (error) {
       setErrorMsg(error.message);
     }
+
+    router.replace('/dashboards')
   }
 
   return (
@@ -35,8 +38,9 @@ export default function SignIn() {
     orientation="vertical"
     variant="outlined"
     sx={{ bgcolor: 'black', "--Card-padding": "30px"}}
-    className="w-fit">
-      <CardContent className="m-auto">
+    className="w-fit"
+    >
+      <CardContent className="rounded">
         <Formik
           initialValues={{
             email: "",
@@ -46,10 +50,10 @@ export default function SignIn() {
           onSubmit={signIn}
         >
           {({ errors, touched }) => (
-            <Form className="flex flex-col w-max">
+            <Form className="flex flex-col w-fit">
               <label>Email</label>
               <Field
-                className="p-1 rounded"
+                className="p-1 rounded border border-green-400"
                 id="email"
                 name="email"
                 placeholder="test@test.com"
@@ -70,9 +74,9 @@ export default function SignIn() {
                 <div className="errors">{errors.password}</div>
               ) : null}
 
-              <Button variant="solid" color="success" className="my-5">
+              <button className="my-5 bg-green-400 p-2 rounded font-bold">
                 Log in
-              </Button>
+              </button>
             </Form>
           )}
         </Formik>

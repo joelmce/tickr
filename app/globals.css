@@ -14,9 +14,8 @@ label {
 }
 input {
   all: unset;
-  background-color: #1465c0;
   color: #eeeeee;
-  border: 1px solid #1465c0;
+  border: 1px solid darkgreen;
 }
 input:focus {
   border: 1px solid white;
@@ -25,6 +24,12 @@ input:focus {
   color: red;
   margin: 0.4rem;
 }
+
+.card-container {
+  background-color: black;
+  border-color: green;
+}
+
 .auth-form {
   scale: 120%;
   border: 2px solid #1465c0;

@@ -4,6 +4,7 @@ import { Field, Form, Formik } from "formik";
 import { useState } from "react";
 import * as Yup from "yup";
 import Button from "@mui/material/Button";
+import { Card, CardContent } from "@mui/joy";
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -35,8 +36,15 @@ export default function SignUp() {
   }
 
   return (
-    <div className="auth-container">
-      <div className="auth-form rounded">
+    <Card
+    color="success"
+    invertedColors
+    orientation="vertical"
+    variant="outlined"
+    sx={{ bgcolor: 'black', "--Card-padding": "30px"}}
+    className="w-fit"
+    >
+      <CardContent className="rounded">
         <Formik
           initialValues={{
             email: "",
@@ -81,15 +89,15 @@ export default function SignUp() {
                 <div className="errors">{errors.alias}</div>
               ) : null}
 
-              <Button variant="contained" type="submit" className="my-5">
+              <button className="my-5 bg-green-400 p-2 rounded font-bold">
                 Submit
-              </Button>
+              </button>
             </Form>
           )}
         </Formik>
         {errorMsg && <p>{errorMsg}</p>}
         {successMsg && <p>{successMsg}</p>}
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
