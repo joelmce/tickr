@@ -23,7 +23,7 @@ export default function Assets() {
           {topCoins.map(([ticker, coinData], index) => {
             return (
               <div
-                className="asset-ticker shadow-md first-of-type:rounded-tl first-of-type:rounded-tr last-of-type:rounded-bl last-of-type:rounded-br cursor-pointer opacity-80"
+                className="asset-ticker shadow-md first-of-type:rounded-tl first-of-type:rounded-tr last-of-type:rounded-bl last-of-type:rounded-br cursor-pointer opacity-80 text-4xl"
                 key={index}
                 onClick={() => setSelectedTicker(coinData)}
               >
@@ -44,7 +44,10 @@ export default function Assets() {
           {selectedTicker && (
             <div className="ticker-details text-lrg mx-2 p-2">
               <div className="coinImg w-10 h-10 my-3">
-                <img src={selectedTicker.img} />
+                <img
+                  src={selectedTicker.img}
+                  alt={`${selectedTicker.name} logo`}
+                />
               </div>
               <p>
                 <strong>Name:</strong> {selectedTicker.name}
@@ -64,6 +67,12 @@ export default function Assets() {
                 {" $"}
                 {selectedTicker.total_volume}
               </p>
+              {/* Placeholder for the chart */}
+              <div className="chart-placeholder bg-black mt-4 shadow-md h-72 rounded-lg">
+                <p className="text-center pt-4 text-gray-400">
+                  Chart will be displayed here
+                </p>
+              </div>
             </div>
           )}
         </div>
