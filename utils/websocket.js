@@ -20,9 +20,6 @@ async function setupWebSocketConnections() {
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         prices[coin] = data.c;
-        console.clear();
-        console.log(prices);
-
         priceEmitter.emit("pricesUpdated", prices);
       };
 
@@ -43,6 +40,5 @@ async function setupWebSocketConnections() {
     console.error(error);
   }
 }
-setupWebSocketConnections();
 
-export { prices, priceEmitter };
+export { prices, priceEmitter, setupWebSocketConnections };

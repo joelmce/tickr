@@ -7,6 +7,10 @@ import { generateStockData } from "@/app/generateMockStockData";
 import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
+import { priceEmitter } from "@/utils/websocket.js";
+import { setupWebSocketConnections } from "@/utils/websocket.js";
+
+setupWebSocketConnections();
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -27,6 +31,25 @@ export default function Dashboard({ metadata }) {
       setCoinPrices(prices);
     });
   }, []);
+
+  useEffect(() => {
+    function handlePriceUpdate(updatedPrices) {
+      setCoinPrices((prevPrices) => ({
+        ...prevPrices,
+        ...updatedPrices,
+      }));
+    }
+
+    priceEmitter.on("pricesUpdated", handlePriceUpdate);
+
+    return () => {
+      priceEmitter.removeListener("pricesUpdated", handlePriceUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("Coin Prices Updated:", coinPrices);
+  }, [coinPrices]);
 
   const topCoins = Object.entries(coinPrices);
 
@@ -64,8 +87,6 @@ export default function Dashboard({ metadata }) {
             total_volume,
           } = coinData;
 
-          console.log(topCoins);
-
           return (
             <div
               key={layoutItem.i}
@@ -74,7 +95,7 @@ export default function Dashboard({ metadata }) {
             >
               <Ticker
                 ticker={name}
-                price={current_price}
+                price={coinPrices[ticker].current_price}
                 diff={price_change_percentage_24h}
                 volume={total_volume}
               >
