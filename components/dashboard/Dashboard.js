@@ -78,7 +78,7 @@ export default function Dashboard({ metadata }) {
                 diff={price_change_percentage_24h}
                 volume={total_volume}
               >
-                <TickerChart data={stockData} />
+                <TickerChart ticker={'BTCUSDT'} /> 
               </Ticker>
             </div>
           );
