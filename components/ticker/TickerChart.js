@@ -1,41 +1,48 @@
 "use client";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function TickerChart({ ticker }) {
-  const [historicalData, setHistoricalData] = useState([])
+  const [historicalData, setHistoricalData] = useState([]);
 
-  const fetchData = async() => {
+  const fetchData = async () => {
     try {
-      const interval = "1hr"
+      const interval = "1h";
 
-      const response = await fetch(`https://api.binance.com/api/v3/klines?symbol=${ticker}&interval=${interval}`);
-      const data = await response.json()
+      const response = await fetch(
+        `https://api.binance.com/api/v3/klines?symbol=${ticker}&interval=${interval}`
+      );
+      const data = await response.json();
 
-      setHistoricalData(data)
+      setHistoricalData(data);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
+    fetchData();
 
-    const updateInterval = setInterval(() => {
-       fetchData() 
-    }, 60 * 60 * 1000) // 60 minutes
+    const updateInterval = setInterval(
+      () => {
+        fetchData();
+      },
+      60 * 60 * 1000
+    ); // 60 minutes
 
     return () => {
-      clearInterval(updateInterval)
-    }
-  }, [])
-  
+      clearInterval(updateInterval);
+    };
+  }, []);
+
   const chartData = {
-    labels: historicalData.map((candle) => new Date(candle[0]).toLocaleTimeString()),
+    labels: historicalData.map((candle) =>
+      new Date(candle[0]).toLocaleTimeString()
+    ),
     datasets: [
       {
-        data: historicalData.map((candle) => parseFloat((candle[4])),
+        data: historicalData.map((candle) => parseFloat(candle[4])),
         borderColor: "rgba(48, 190, 42, 0.8)",
         backgroundColor: "rgba(12, 48, 10, 0.2)", // Dyamamic
         lineTension: 0.1,
