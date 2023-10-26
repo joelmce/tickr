@@ -34,8 +34,8 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className="text-3xl">Your Dashboards</h1>
-      <a href="/dashboards/new" className="bg-green-700 p-2 my-4 rounded">
+      <h1 className="text-3xl mb-5">Your Dashboards</h1>
+      <a href="/dashboards/new" className="bg-green-700 p-2 rounded">
         New Dashboard
       </a>
       {dashboards.length >= 1 ? (
