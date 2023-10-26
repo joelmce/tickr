@@ -24,12 +24,9 @@ export default function TickerChart({ ticker }) {
   useEffect(() => {
     fetchData();
 
-    const updateInterval = setInterval(
-      () => {
-        fetchData();
-      },
-      60 * 60 * 1000
-    ); // 60 minutes
+    const updateInterval = setInterval(() => {
+      fetchData();
+    }, 60000); // 60 minutes
 
     return () => {
       clearInterval(updateInterval);
