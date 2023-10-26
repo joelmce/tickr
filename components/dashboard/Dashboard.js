@@ -66,10 +66,10 @@ export default function Dashboard({ metadata }) {
           return (
             <div
               key={layoutItem.i}
-              className={`rounded border border-[#164914] p-4 bg-gradient-to-b from-[#0d0c0b] shadow-md opacity-80 cursor-pointer ${
+              className={`rounded border p-4 bg-gradient-to-b from-[#0d0c0b] shadow-md opacity-80 cursor-pointer ${
                 price_change_percentage_24h.toFixed(2) > 0
-                  ? "to-green-900"
-                  : "to-red-900"
+                  ? "to-green-900 border-[#164914]"
+                  : "to-red-900 border-red-900"
               }`}
               data-grid={layoutItem}
             >
