@@ -3,7 +3,7 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
-export default function TickerChart({ ticker }) {
+export default function TickerChart({ ticker, bias }) {
   const [historicalData, setHistoricalData] = useState([]);
 
   const fetchData = async () => {
@@ -40,8 +40,7 @@ export default function TickerChart({ ticker }) {
     datasets: [
       {
         data: historicalData.map((candle) => parseFloat(candle[4])),
-        borderColor: "rgba(48, 190, 42, 0.8)",
-        backgroundColor: "rgba(12, 48, 10, 0.2)", // Dyamamic
+        borderColor: bias > 0 ? "rgba(48, 190, 42, 0.8)" : "red",
         lineTension: 0.1,
         borderWidth: 1,
       },

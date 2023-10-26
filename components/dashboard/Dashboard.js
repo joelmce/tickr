@@ -3,7 +3,6 @@ import ResponsiveGridLayout from "react-grid-layout";
 import Creator from "./Creator";
 import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
-import { generateStockData } from "@/app/generateMockStockData";
 import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
@@ -30,13 +29,13 @@ export default function Dashboard({ metadata }) {
 
   const topCoins = Object.entries(coinPrices);
 
-  const stockData = generateStockData();
-
   return (
     <>
       <div className="mx-6">
-        <h1 className="pl-1 mb-2 font-bold text-xl">{metadata.name}</h1>
-        <p className="my-4">{metadata.description}</p>
+        <h1 className="pl-1 mb-2 font-extrabold text-6xl">
+          {metadata.name.toUpperCase()}
+        </h1>
+        <p className="my-4 text-xl">{metadata.description}</p>
         <Creator creator={metadata.creator} />
         <AddToFavourite />
       </div>
@@ -64,12 +63,14 @@ export default function Dashboard({ metadata }) {
             total_volume,
           } = coinData;
 
-          console.log(topCoins);
-
           return (
             <div
               key={layoutItem.i}
-              className="rounded border border-[#164914] p-4 bg-gradient-to-b from-black to-green-700 shadow-md opacity-80 cursor-pointer"
+              className={`rounded border border-[#164914] p-4 bg-gradient-to-b from-[#0d0c0b] shadow-md opacity-80 cursor-pointer ${
+                price_change_percentage_24h.toFixed(2) > 0
+                  ? "to-green-900"
+                  : "to-red-900"
+              }`}
               data-grid={layoutItem}
             >
               <Ticker
@@ -84,7 +85,10 @@ export default function Dashboard({ metadata }) {
                   currency: "USD",
                 }).format(total_volume)}
               >
-                <TickerChart ticker={"BTCUSDT"} />
+                <TickerChart
+                  ticker={`${ticker.toUpperCase()}USDT`}
+                  bias={price_change_percentage_24h.toFixed(2)}
+                />
               </Ticker>
             </div>
           );
