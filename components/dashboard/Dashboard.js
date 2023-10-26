@@ -74,11 +74,17 @@ export default function Dashboard({ metadata }) {
             >
               <Ticker
                 ticker={name}
-                price={current_price}
-                diff={price_change_percentage_24h}
-                volume={total_volume}
+                price={new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(current_price)}
+                diff={price_change_percentage_24h.toFixed(2)}
+                volume={new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(total_volume)}
               >
-                <TickerChart data={stockData} />
+                <TickerChart ticker={"BTCUSDT"} />
               </Ticker>
             </div>
           );
