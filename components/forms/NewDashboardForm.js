@@ -32,6 +32,12 @@ export default function NewDashboardForm() {
         name: formData.name,
         description: formData.description,
         creator: user.user_metadata.alias,
+        layout: [
+          {ticker: "btc"},
+          {ticker: "eth"},
+          {ticker: "bnb"},
+          {ticker: "ada"}
+        ]
       })
       .select();
     

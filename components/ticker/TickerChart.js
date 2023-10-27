@@ -3,6 +3,11 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
+/**
+ * 
+ * @param ticker: 'BTCUSDT' 
+ * @returns 
+ */
 export default function TickerChart({ ticker, bias }) {
   const [historicalData, setHistoricalData] = useState([]);
 
