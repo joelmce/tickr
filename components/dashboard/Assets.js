@@ -1,17 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
-// import { fetchTopCoins } from "@/utils/fetchcoins.js";
+import { fetchTopCoins } from "@/utils/fetchcoins.js";
 
 export default function Assets() {
   const [coinPrices, setCoinPrices] = useState({});
   const [selectedTicker, setSelectedTicker] = useState(null);
 
   useEffect(() => {
-    // fetchTopCoins().then((topCoinPrices) => {
-    //   setCoinPrices(topCoinPrices);
-    // });
+    fetchTopCoins().then((topCoinPrices) => {
+      setCoinPrices(topCoinPrices);
+
+      if (topCoinPrices.btc) {
+        setSelectedTicker(topCoinPrices.btc);
+      }
+    });
   }, []);
-  
+
   const topCoins = Object.entries(coinPrices);
 
   return (

@@ -10,7 +10,7 @@ async function fetchCoins(tickers) {
         order: "market_cap_desc",
         sparkline: false,
       },
-    }
+    },
   );
 
   const fetchedPrices = [];
@@ -38,15 +38,15 @@ async function fetchTopCoins() {
         order: "market_cap_desc",
         sparkline: false,
       },
-    }
+    },
   );
 
   const fetchedPrices = {};
   response.data
     .filter(
-      (coin) => !["steth", "usdt", "usdc", "tusd", "dai"].includes(coin.symbol)
+      (coin) => !["steth", "usdt", "usdc", "tusd", "dai"].includes(coin.symbol),
     )
-    .slice(0, 20)
+    .slice(0, 13)
     .forEach((coin) => {
       fetchedPrices[coin.symbol] = {
         market_cap: coin.market_cap,
