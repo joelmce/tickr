@@ -1,9 +1,9 @@
 const { fetchTopCoins } = require("@/utils/fetchcoins.js");
-const WebSocket = require("ws");
 import { EventEmitter } from "events";
 
 let prices = {};
 const priceEmitter = new EventEmitter();
+const sockets = [];
 
 async function setupWebSocketConnections() {
   try {
@@ -15,15 +15,15 @@ async function setupWebSocketConnections() {
     top10Coins.forEach((coin) => {
       const endpoint = `wss://stream.binance.com:9443/ws/${coin.toLowerCase()}usdt@ticker`;
       const socket = new WebSocket(endpoint);
+      sockets.push(socket);
 
       // update price object on price change
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        prices[coin] = data.c;
-        console.clear();
-        console.log(prices);
-
-        priceEmitter.emit("pricesUpdated", prices);
+        if (data && data.c && !isNaN(data.c)) {
+          prices[coin] = { current_price: data.c };
+          priceEmitter.emit("pricesUpdated", prices);
+        }
       };
 
       socket.onerror = (error) => {
@@ -34,15 +34,31 @@ async function setupWebSocketConnections() {
         console.warn(
           `WebSocket closed for coin ${coin}. Attempting to reconnect...`,
         );
-        setTimeout(() => {
-          setupWebSocketConnections();
-        }, 5000);
+        setTimeout(() => setupWebSocketForCoin(coin), 5000);
       };
     });
   } catch (error) {
     console.error(error);
   }
 }
+
+function cleanupWebSockets() {
+  sockets.forEach((socket) => {
+    socket.close();
+  });
+  sockets.length = 0;
+}
+
 setupWebSocketConnections();
+
+process.on("exit", cleanupWebSockets);
+process.on("SIGINT", () => {
+  cleanupWebSockets();
+  process.exit(0);
+});
+process.on("SIGTERM", () => {
+  cleanupWebSockets();
+  process.exit(0);
+});
 
 export { prices, priceEmitter };
