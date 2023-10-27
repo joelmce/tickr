@@ -51,6 +51,7 @@ async function fetchTopCoins() {
     .forEach((coin) => {
       fetchedPrices[coin.symbol] = {
         market_cap: coin.market_cap,
+        symbol: coin.symbol,
         img: coin.image,
         name: coin.name,
         current_price: coin.current_price,
