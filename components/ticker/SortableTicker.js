@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Ticker from "./Ticker";
 import TickerChart from "./TickerChart";
 
-export default function SortableTest({ ticker, onDelete }) {
-  const [hovered, setHovered] = useState(false);
+export default function SortableTest({ ticker }) {
+  const symbol = String(ticker.symbol);
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: ticker.id });
 
@@ -25,22 +25,15 @@ export default function SortableTest({ ticker, onDelete }) {
           ? "to-green-900 border-[#164914]"
           : "to-red-900 border-red-900"
       }`}
-      onMouseEnter={() => {
-        setHovered(true);
-      }}
-      onMouseLeave={() => {
-        setHovered(false);
-      }}
     >
       <Ticker
         ticker={ticker.name}
         price={ticker.current_price}
         diff={ticker.price_change_percentage_24h}
         volume={ticker.total_volume}
-        hovered={hovered}
       >
         <TickerChart
-          ticker={`BTCUSDT`}
+          ticker={`${symbol.toUpperCase()}USDT`}
           bias={ticker.price_change_percentage_24h.toFixed(2)}
         />
       </Ticker>
