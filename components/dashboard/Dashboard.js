@@ -7,8 +7,6 @@ import { fetchTopCoins } from "@/utils/fetchcoins";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { priceEmitter } from "@/utils/socket.js";
 import { DashboardHeader } from "./DashboardHeader";
-import { FavouritesDash } from "@/components/dashboard/FavouritesDash.js";
-import { Skeleton } from "@mui/joy";
 
 
 export default function Dashboard({ metadata, user }) {
@@ -24,9 +22,13 @@ export default function Dashboard({ metadata, user }) {
   const [layout, setLayout] = useState(originalLayout);
   const [coinPrices, setCoinPrices] = useState({});
   const [livePrices, setLivePrices] = useState({});
-  const supabase = createClientComponentClient();
 
-  useEffect(async () => {
+  useEffect(() => {
+    fetchTopCoins().then((initialPrices) => {  
+      setCoinPrices(initialPrices);
+      setLivePrices(initialPrices);
+    });
+
     const handlePricesUpdate = (updatedPrices) => {
       setLivePrices((prevPrices) => ({ ...prevPrices, ...updatedPrices }));
     };
@@ -36,13 +38,6 @@ export default function Dashboard({ metadata, user }) {
     return () => {
       priceEmitter.removeListener("pricesUpdated", handlePricesUpdate);
     };
-  }, []);
-  
-  useEffect(() => {
-    fetchTopCoins().then((initialPrices) => {  
-      setCoinPrices(initialPrices);
-      setLivePrices(initialPrices);
-    });
   }, []);
 
   const topCoins = Object.entries(coinPrices);

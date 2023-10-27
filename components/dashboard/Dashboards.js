@@ -1,9 +1,6 @@
 "use client";
 
 import DashboardItem from "./DashboardItem";
-import FavouritesDash from "@/components/dashboard/FavouritesDash"
-
-let favourites = [];
 
 export default function Dashboards({ dashboards }) {
   return (
@@ -12,9 +9,6 @@ export default function Dashboards({ dashboards }) {
         {dashboards.map((item) => {
           return <DashboardItem key={item.dashboard_id} metadata={item}/>;
         })}
-      </section>
-      <section>
-        <FavouritesDash favourites={favourites} />
       </section>
     </>
   );
