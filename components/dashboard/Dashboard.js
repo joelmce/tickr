@@ -6,6 +6,8 @@ import TickerChart from "../ticker/TickerChart";
 import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
+import { CircularProgress } from "@mui/joy";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -18,8 +20,27 @@ export default function Dashboard({ metadata }) {
     { i: "g", x: 6, y: 0, w: 1, h: 1 },
   ];
 
+  const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [layout, setLayout] = useState(originalLayout);
   const [coinPrices, setCoinPrices] = useState({});
+
+  const saveLayout = async (l) => {
+    const supabase = createClientComponentClient();
+
+    setLayout(l);
+    const { error } = await supabase
+      .from("Dashboards")
+      .update({ layout: l })
+      .eq("dashboard_id", metadata.dashboard_id);
+
+    if (error) console.error(error);
+  };
+
+  const updateEditState = (e) => {
+    e.preventDefault();
+    setEditMode(!editMode);
+  };
 
   useEffect(() => {
     fetchTopCoins().then((prices) => {
@@ -38,6 +59,27 @@ export default function Dashboard({ metadata }) {
         <p className="my-4 text-xl">{metadata.description}</p>
         <Creator creator={metadata.creator} />
         <AddToFavourite />
+        <div className="float-right">
+          {editMode ? (
+            <button
+              className="p-2 rounded bg-green-900"
+              onClick={updateEditState}
+            >
+              {loading ? (
+                <CircularProgress size="sm" variant="plain" />
+              ) : (
+                "Save"
+              )}
+            </button>
+          ) : (
+            <button
+              className="p-2 rounded bg-blue-900"
+              onClick={updateEditState}
+            >
+              Edit
+            </button>
+          )}
+        </div>
       </div>
 
       <ResponsiveGridLayout
@@ -50,7 +92,7 @@ export default function Dashboard({ metadata }) {
         width={1100}
         isBounded={true}
         isDroppable={true}
-        onLayoutChange={(_layout) => setLayout(_layout)}
+        onLayoutChange={(_layout) => saveLayout(_layout)}
       >
         {topCoins.map(([ticker, coinData], index) => {
           const layoutItem = originalLayout[index];

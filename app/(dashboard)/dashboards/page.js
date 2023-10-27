@@ -1,5 +1,4 @@
 import Dashboards from "@/components/dashboard/Dashboards";
-import NewDashboard from "@/components/dashboard/NewDashboard";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -34,15 +33,11 @@ export default async function Page() {
 
   return (
     <>
-      <h1 className="text-3xl mb-5">Your Dashboards</h1>
-      <a href="/dashboards/new" className="bg-green-700 p-2 rounded">
+      <h1 className="text-3xl">Your Dashboards</h1>
+      <a href="/dashboards/new" className="bg-green-700 p-2 my-4 rounded">
         New Dashboard
       </a>
-      {dashboards.length >= 1 ? (
-        <Dashboards dashboards={dashboards} />
-      ) : (
-        <NewDashboard />
-      )}
+      {dashboards.length >= 1 ? <Dashboards dashboards={dashboards} /> : null}
     </>
   );
 }
