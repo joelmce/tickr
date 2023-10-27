@@ -99,7 +99,7 @@ export default function Dashboard({ metadata, user }) {
       <div className="">
         <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={items}>
-            <Grid columns={5}>
+            <Grid columns={4}>
               {items.map((item) => {
                 return <SortableTest key={item.id} ticker={item} />;
               })}
