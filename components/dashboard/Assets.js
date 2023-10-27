@@ -88,7 +88,7 @@ export default function Assets() {
                   Chart will be displayed here
                 </p>
                 <TickerChart
-                  ticker={selectedTicker.symbol.toUpperCase() + "USDT"}
+                // ticker={selectedTicker.symbol + "USDT"}
                 />
               </div>
             </div>
