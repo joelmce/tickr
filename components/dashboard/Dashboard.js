@@ -7,6 +7,9 @@ import { fetchTopCoins } from "@/utils/fetchcoins";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { priceEmitter } from "@/utils/socket.js";
 import { DashboardHeader } from "./DashboardHeader";
+import { FavouritesDash } from "@/components/dashboard/FavouritesDash.js";
+import { Skeleton } from "@mui/joy";
+
 
 export default function Dashboard({ metadata, user }) {
   const originalLayout = [
@@ -18,50 +21,12 @@ export default function Dashboard({ metadata, user }) {
     { i: "f", x: 5, y: 0, w: 1, h: 1 },
     { i: "g", x: 6, y: 0, w: 1, h: 1 },
   ];
-
-  const [editMode, setEditMode] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [layout, setLayout] = useState(originalLayout);
-  const [data, updateData] = useState(metadata)
   const [coinPrices, setCoinPrices] = useState({});
   const [livePrices, setLivePrices] = useState({});
   const supabase = createClientComponentClient();
 
-  const saveLayout = async (l) => {
-
-    setLayout(l);
-    const { error } = await supabase
-      .from("Dashboards")
-      .update({ layout: l })
-      .eq("dashboard_id", metadata.dashboard_id);
-
-    if (error) console.error(error);
-  };
-
-
-  const updateEditState = async(e) => {
-    e.preventDefault();
-    if(editMode) {
-      setLoading(true)
-      const { error } = await supabase.from("Dashboards").update({ description: data.description }).eq('dashboard_id', metadata.dashboard_id)
-      if(error) console.error(error)
-      setLoading(false)
-    }
-    setEditMode(!editMode);
-  };
-
-  const updateMetadata = (e) => {
-    const { name, value } = e.target
-
-    updateData((prev) => {
-      return {
-        ...prev,
-        [name]: value
-      }
-    })
-  }
-
-  useEffect(() => {
+  useEffect(async () => {
     const handlePricesUpdate = (updatedPrices) => {
       setLivePrices((prevPrices) => ({ ...prevPrices, ...updatedPrices }));
     };
@@ -98,7 +63,7 @@ export default function Dashboard({ metadata, user }) {
         width={1100}
         isBounded={true}
         isDroppable={true}
-        onLayoutChange={(_layout) => saveLayout(_layout)}
+        // onLayoutChange={(_layout) => saveLayout(_layout)}
       >
         {topCoins.map(([ticker, coinData], index) => {
           const layoutItem = originalLayout[index];

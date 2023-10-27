@@ -48,7 +48,6 @@ export default async function setupWebSocketConnections() {
     });
 
     setInterval(() => {
-      console.log(calculatePriceDiff(prices, tempPrices));
       prices = { ...tempPrices };
       priceDiff.push(prices, tempPrices);
       priceEmitter.emit("pricesUpdated", prices);

@@ -14,5 +14,5 @@ export default async function Page({ params }) {
 
     const dashboardMetadata = await getDashboard(dashboardId)
 
-    return <Dashboard metadata={dashboardMetadata[0]} user={user}/>
+    return <Dashboard metadata={dashboardMetadata} user={user}/>
 }
