@@ -6,6 +6,10 @@ import TickerChart from "./TickerChart";
 
 export default function SortableTest({ ticker }) {
   const symbol = String(ticker.symbol);
+  const vol_format = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: ticker.id });
 
@@ -29,8 +33,8 @@ export default function SortableTest({ ticker }) {
       <Ticker
         ticker={ticker.name}
         price={ticker.current_price}
-        diff={ticker.price_change_percentage_24h}
-        volume={ticker.total_volume}
+        diff={ticker.price_change_percentage_24h.toFixed(2)}
+        volume={vol_format.format(ticker.total_volume)}
       >
         <TickerChart
           ticker={`${symbol.toUpperCase()}USDT`}

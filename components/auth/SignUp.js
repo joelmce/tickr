@@ -5,6 +5,7 @@ import { useState } from "react";
 import * as Yup from "yup";
 import Button from "@mui/material/Button";
 import { Card, CardContent } from "@mui/joy";
+import { CircularProgress } from "@mui/joy";
 
 const SignUpSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -16,8 +17,10 @@ export default function SignUp() {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
   const [successMsg, setSuccessMsg] = useState(null);
+  const [loading, isLoading] = useState(false);
 
   async function handleSignUp(formData) {
+    isLoading(true);
     const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
@@ -29,20 +32,22 @@ export default function SignUp() {
     });
 
     if (error) {
+      isLoading(false);
       setErrorMsg(error.message);
     } else {
+      isLoading(false);
       setSuccessMsg("Success! Check your email");
     }
   }
 
   return (
     <Card
-    color="success"
-    invertedColors
-    orientation="vertical"
-    variant="outlined"
-    sx={{ bgcolor: 'black', "--Card-padding": "30px"}}
-    className="w-fit"
+      color="success"
+      invertedColors
+      orientation="vertical"
+      variant="outlined"
+      sx={{ bgcolor: "black", "--Card-padding": "30px" }}
+      className="w-fit"
     >
       <CardContent className="rounded">
         <Formik
@@ -89,8 +94,11 @@ export default function SignUp() {
                 <div className="errors">{errors.alias}</div>
               ) : null}
 
-              <button className="my-5 bg-green-400 p-2 rounded font-bold">
-                Submit
+              <button
+                className="my-5 bg-green-400 p-2 rounded font-bold"
+                disabled={loading ? true : false}
+              >
+                {loading ? <CircularProgress /> : "Sign Up"}
               </button>
             </Form>
           )}
