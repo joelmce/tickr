@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { fetchTopCoins } from "@/utils/fetchcoins.js";
+import TickerChart from "@/components/ticker/TickerChart";
 
 export default function Assets() {
   const [coinPrices, setCoinPrices] = useState({});
@@ -86,6 +87,9 @@ export default function Assets() {
                 <p className="text-center pt-4 text-gray-400">
                   Chart will be displayed here
                 </p>
+                <TickerChart
+                  ticker={selectedTicker.symbol.toUpperCase() + "USDT"}
+                />
               </div>
             </div>
           )}
