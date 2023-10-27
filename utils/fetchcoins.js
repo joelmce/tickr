@@ -26,7 +26,7 @@ async function fetchCoins(tickers) {
     })
   })
 
-  console.log("fetched ALL coins");
+  console.log("fetched ALL coins", fetchedPrices);
   return fetchedPrices;
 }
 

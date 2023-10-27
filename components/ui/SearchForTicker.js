@@ -1,50 +1,56 @@
-"use client";
+// import { supportedTickers } from "@/utils/supportedTickers"
+// import { CircularProgress } from "@mui/joy"
+// import { useEffect, useState } from "react"
 
-import { useState } from "react";
+// export function SearchForTicker({ addToDashboard }) {
+//   const [searchTerm, setSearchTerm] = useState('')
+//   const [searchResults, setSearchResults] = useState([])
+//   const [selectedTickers, updateSelectedTickers] = useState([])
+//   const [loading, setLoading] = useState(false)
 
-const fetchCoinData = async (ticker) => {
-  try {
-    const response = await fetch(
-      "https://api.coingecko.com/api/v3/coins/list?include_platform=false"
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return null;
-  }
-};
+//   useEffect(() => {
+//     const filteredTickers = supportedTickers.filter(ticker =>
+//       ticker.symbol.toLowerCase().includes(searchTerm.toLowerCase())
+//     );
+//     setSearchResults(filteredTickers);
+//   }, [searchTerm])
 
-export function SearchForTicker() {
-  const [search, updateSearch] = useState("");
-  const [searchResults, updateSearchResults] = useState([]);
+//   const handleAddTicker = (ticker) => {
+//     updateSelectedTickers(ticker)
+//     console.log(selectedTickers)
+//     setSearchTerm('')
+//   }
 
-  const handleSearchChange = async (e) => {
-    const term = e.target.value;
-    updateSearch(term);
+//   const handleRemoveSelectedTicker = (id) => {
+//     const updatedTickers = selectedTickers.filter((ticker) => ticker.id !== id);
+//     updateSelectedTickers(updatedTickers);
+//   }
 
-    if (term.trim() === "") {
-      updateSearchResults([]);
-    } else {
-      const data = await fetchCoinData(term);
-      updateSearchResults(data || []);
-    }
-  };
-
-  return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search by ticker..."
-        value={search}
-        onChange={handleSearchChange}
-      />
-      <ul>
-        {searchResults.map((coin) => (
-          <li key={coin.id}>
-            {coin.name} ({coin.symbol.toUpperCase()}) - ${coin.current_price}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         value={searchTerm}
+//         onChange={(e) => setSearchTerm(e.target.value)}
+//         placeholder="Enter ticker symbol"
+//       />
+//       <ul>
+//         {loading ? <CircularProgress/> : searchResults.map((result, i) => (
+//           <li key={i}>
+//             {result.name} ({result.symbol})
+//             <button onClick={() => handleAddTicker(result)}>Add</button>
+//           </li>
+//         ))}
+//       </ul>
+//       {selectedTickers &&
+//          <ul>
+//             {selectedTickers.map((ticker) => {
+//             return (<li className="bg-green-800 p-2 rounded" id={ticker.id}>
+//               {ticker.name}
+//               <span onClick={() => handleRemoveSelectedTicker(ticker.id)}>x</span>
+//             </li> )
+//             })}
+//         </ul>}
+//     </div>
+//   )
+// }

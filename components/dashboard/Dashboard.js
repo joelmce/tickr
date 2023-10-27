@@ -6,6 +6,7 @@ import { DashboardHeader } from "./DashboardHeader";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove, horizontalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableTest from "../ticker/SortableTest";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Grid = ({ columns, children}) => {
   return (
@@ -27,16 +28,25 @@ const Grid = ({ columns, children}) => {
 
 export default function Dashboard({ metadata, user }) {
   const [items, setItems] = useState([])
+  const [storedTickers, updateStoredTickers] = useState([])
   const [finalItems, setFinalItems] = useState([]);
   const [coinPrices, setCoinPrices] = useState({});
   const [livePrices, setLivePrices] = useState({});
 
+  const supabase = createClientComponentClient() 
+  const tickers = []
 
   useEffect(() => {
-    const arr = ['bitcoin', 'solana', 'cardano', 'doge', 'ethereum', 'litecoin']
-    fetchCoins(arr).then((data) => {
-      setItems(data)
-    })
+    const getTickers = async() => {
+      const { data } = await supabase.from("Dashboards").select('coins').eq('dashboard_id', metadata.dashboard_id)
+
+      fetchCoins(data[0].coins).then((data) => {
+        setItems(data)
+      })
+    }
+    getTickers()
+
+    
     // fetchTopCoins().then((initialPrices) => {  
     //   const filteredPrices = Object.keys(initialPrices)
     //   .filter(ticker => chosenTickers.includes(ticker))
@@ -63,17 +73,14 @@ export default function Dashboard({ metadata, user }) {
 
   const onDragEnd = (event) => {
     const { active, over } = event
-    console.log(event)
 
     if (active.id === over.id) {
       return;
     }
 
     setItems((items) => {
-      console.log("Stored Items:", items)
       const oldIndex = items.findIndex((item) => item.id === active.id);
       const newIndex = items.findIndex((item) => item.id === over.id);
-      console.log(oldIndex, newIndex)
       return arrayMove(items, oldIndex, newIndex);
     });
 

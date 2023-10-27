@@ -1,0 +1,17 @@
+export const supportedTickers = [
+    "BTC",
+    "ETH",
+    "BNB",
+    "SOL",
+    "ADA",
+    "XRP",
+    "DOGE",
+    "DOT",
+    "LTC",
+    "LINK",
+    "BCH",
+    "ALGO",
+    "ATOM",
+    "XTZ",
+    "UNI",
+  ];

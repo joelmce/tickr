@@ -8,6 +8,8 @@ import {  useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
 import { CircularProgress } from "@mui/joy";
+import { SearchForTicker } from "../ui/SearchForTicker";
+import { supportedTickers } from "@/utils/supportedTickers";
 
 const NewDashboardSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -32,12 +34,7 @@ export default function NewDashboardForm() {
         name: formData.name,
         description: formData.description,
         creator: user.user_metadata.alias,
-        layout: [
-          {ticker: "btc"},
-          {ticker: "eth"},
-          {ticker: "bnb"},
-          {ticker: "ada"}
-        ]
+        coins: supportedTickers.map((ticker) => ticker)
       })
       .select();
     
