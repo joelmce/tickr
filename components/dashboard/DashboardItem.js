@@ -14,9 +14,9 @@ export default function DashboardItem({ metadata }) {
   return (
     <li key={id} className="list-none rounded border border-white p-4">
       <h3 className="font-extrabold">{name}</h3>
-      <p>{description}</p>
+      <p className="pl-1">{description}</p>
       <Link href={`/dashboards/${dashboard_id}`}>
-        <Button color="success" variant="outlined">
+        <Button className="mr-2" color="success" variant="outlined">
           View
         </Button>
       </Link>
