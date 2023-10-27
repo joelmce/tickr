@@ -4,9 +4,9 @@ import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
 /**
- * 
- * @param ticker: 'BTCUSDT' 
- * @returns 
+ *
+ * @param ticker: 'BTCUSDT'
+ * @returns
  */
 export default function TickerChart({ ticker, bias }) {
   const [historicalData, setHistoricalData] = useState([]);
@@ -16,7 +16,7 @@ export default function TickerChart({ ticker, bias }) {
       const interval = "1h";
 
       const response = await fetch(
-        `https://api.binance.com/api/v3/klines?symbol=${ticker}&interval=${interval}`
+        `https://api.binance.com/api/v3/klines?symbol=${ticker}&interval=${interval}`,
       );
       const data = await response.json();
 
@@ -36,11 +36,11 @@ export default function TickerChart({ ticker, bias }) {
     return () => {
       clearInterval(updateInterval);
     };
-  }, []);
+  }, [ticker]);
 
   const chartData = {
     labels: historicalData.map((candle) =>
-      new Date(candle[0]).toLocaleTimeString()
+      new Date(candle[0]).toLocaleTimeString(),
     ),
     datasets: [
       {
