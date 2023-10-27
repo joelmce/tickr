@@ -99,3 +99,12 @@ form {
 .nav-item:last-of-type {
   margin-right: 10px;
 }
+
+.editable {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.editable.active {
+  border: 1px solid white;
+}

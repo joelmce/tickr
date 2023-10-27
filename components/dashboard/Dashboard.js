@@ -1,14 +1,15 @@
 "use client";
 import ResponsiveGridLayout from "react-grid-layout";
-import Creator from "./Creator";
 import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
 import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
-import { priceEmitter } from "@/utils/websocket.js";
 import { CircularProgress } from "@mui/joy";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { priceEmitter } from "@/utils/socket.js";
+import { ModeEdit } from "@mui/icons-material";
+import { DashboardHeader } from "./DashboardHeader";
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -24,11 +25,12 @@ export default function Dashboard({ metadata }) {
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [layout, setLayout] = useState(originalLayout);
+  const [data, updateData] = useState(metadata)
   const [coinPrices, setCoinPrices] = useState({});
   const [livePrices, setLivePrices] = useState({});
+  const supabase = createClientComponentClient();
 
   const saveLayout = async (l) => {
-    const supabase = createClientComponentClient();
 
     setLayout(l);
     const { error } = await supabase
@@ -39,10 +41,28 @@ export default function Dashboard({ metadata }) {
     if (error) console.error(error);
   };
 
-  const updateEditState = (e) => {
+
+  const updateEditState = async(e) => {
     e.preventDefault();
+    if(editMode) {
+      setLoading(true)
+      const { error } = await supabase.from("Dashboards").update({ description: data.description }).eq('dashboard_id', metadata.dashboard_id)
+      if(error) console.error(error)
+      setLoading(false)
+    }
     setEditMode(!editMode);
   };
+
+  const updateMetadata = (e) => {
+    const { name, value } = e.target
+
+    updateData((prev) => {
+      return {
+        ...prev,
+        [name]: value
+      }
+    })
+  }
 
   useEffect(() => {
     const handlePricesUpdate = (updatedPrices) => {
@@ -55,9 +75,9 @@ export default function Dashboard({ metadata }) {
       priceEmitter.removeListener("pricesUpdated", handlePricesUpdate);
     };
   }, []);
-
+  
   useEffect(() => {
-    fetchTopCoins().then((initialPrices) => {
+    fetchTopCoins().then((initialPrices) => {  
       setCoinPrices(initialPrices);
       setLivePrices(initialPrices);
     });
@@ -68,33 +88,7 @@ export default function Dashboard({ metadata }) {
   return (
     <>
       <div className="mx-6">
-        <h1 className="pl-1 mb-2 font-extrabold text-6xl">
-          {metadata.name.toUpperCase()}
-        </h1>
-        <p className="my-4 text-xl">{metadata.description}</p>
-        <Creator creator={metadata.creator} />
-        <AddToFavourite />
-        <div className="float-right">
-          {editMode ? (
-            <button
-              className="p-2 rounded bg-green-900"
-              onClick={updateEditState}
-            >
-              {loading ? (
-                <CircularProgress size="sm" variant="plain" />
-              ) : (
-                "Save"
-              )}
-            </button>
-          ) : (
-            <button
-              className="p-2 rounded bg-blue-900"
-              onClick={updateEditState}
-            >
-              Edit
-            </button>
-          )}
-        </div>
+        <DashboardHeader metadata={metadata}/>
       </div>
 
       <ResponsiveGridLayout
@@ -114,8 +108,7 @@ export default function Dashboard({ metadata }) {
           if (!layoutItem) return null;
 
           const { name, price_change_percentage_24h, total_volume } = coinData;
-
-          console.log(livePrices[ticker].current_price);
+          
           const livePriceValue = livePrices[ticker].current_price;
 
 

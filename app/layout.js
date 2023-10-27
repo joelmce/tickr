@@ -4,6 +4,7 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthProvider from "@/components/AuthProvider";
 import { Inconsolata } from "next/font/google";
+import setupWebSocketConnections from "@/utils/socket";
 
 export const metadata = {
   title: "Tickr",

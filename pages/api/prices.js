@@ -1,4 +1,4 @@
-import { prices } from "@/utils/websocket";
+import { prices } from "@/utils/socket";
 
 export default function handler(req, res) {
   const coin = req.query.coin;
