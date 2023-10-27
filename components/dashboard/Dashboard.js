@@ -9,7 +9,7 @@ import {
   arrayMove,
   horizontalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import SortableTest from "../ticker/SortableTest";
+import SortableTest from "../ticker/SortableTicker";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Grid = ({ columns, children }) => {
@@ -46,7 +46,6 @@ export default function Dashboard({ metadata, user }) {
         .select("coins")
         .eq("dashboard_id", metadata.dashboard_id);
 
-      console.log(data[0].coins);
       fetchCoins(data[0].coins).then((data) => {
         setItems(data);
       });

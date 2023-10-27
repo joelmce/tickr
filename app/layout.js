@@ -4,7 +4,9 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AuthProvider from "@/components/AuthProvider";
 import { Inconsolata } from "next/font/google";
-import setupWebSocketConnections from "@/utils/socket";
+import ProgressBar from "@/app/Providers";
+import Providers from "@/app/Providers";
+import Link from "next/link";
 
 export const metadata = {
   title: "Tickr",
@@ -27,10 +29,12 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className={roboto.className}>
       <body className="text-white">
-        <AuthProvider accessToken={accessToken}>
-          <NavBar user={session?.user} />
-          <main className="mx-14 my-14 select-none">{children}</main>
-        </AuthProvider>
+        <Providers>
+          <AuthProvider accessToken={accessToken}>
+            <NavBar user={session?.user} />
+            <main className="mx-14 my-14 select-none">{children}</main>
+          </AuthProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { DeleteConfirmationButton } from "../ui/DeleteConfirmationButton";
 import { Button } from "@mui/joy";
+import Link from "next/link";
 
 export default function DashboardItem({ metadata }) {
   const { id, name, description, dashboard_id } = metadata;
@@ -11,17 +12,15 @@ export default function DashboardItem({ metadata }) {
   };
 
   return (
-    <li
-      key={id}
-      className="list-none rounded border border-white p-4"
-      
-    >
+    <li key={id} className="list-none rounded border border-white p-4">
       <h3 className="font-extrabold">{name}</h3>
       <p>{description}</p>
-      <Button color="success" variant="outlined" onClick={goToDashboard}>
-        View
-      </Button>
-      <DeleteConfirmationButton name={name} dashboard_id={dashboard_id}/>
+      <Link href={`/dashboards/${dashboard_id}`}>
+        <Button color="success" variant="outlined">
+          View
+        </Button>
+      </Link>
+      <DeleteConfirmationButton name={name} dashboard_id={dashboard_id} />
     </li>
   );
 }
