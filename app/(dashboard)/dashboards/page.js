@@ -16,17 +16,9 @@ export default async function Page() {
   const getDashboards = async () => {
     const { data: dashboard, error } = await supabase
       .from("Dashboards")
-      .select();
+      .select().eq('id', user.id);
     if (error) console.log(error);
     return dashboard;
-  };
-
-  const deleteDashboard = async (e) => {
-    const { error } = await supabase
-      .from("Dashboards")
-      .delete()
-      .eq("id", e.target.id);
-    if (error) console.log(error);
   };
 
   const dashboards = await getDashboards();
@@ -37,7 +29,7 @@ export default async function Page() {
       <a href="/dashboards/new" className="bg-green-700 p-2 my-4 rounded">
         New Dashboard
       </a>
-      {dashboards.length >= 1 ? <Dashboards dashboards={dashboards} /> : null}
+      {dashboards.length >= 1 ? <Dashboards dashboards={dashboards}  /> : null}
     </>
   );
 }

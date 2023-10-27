@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { Card } from "@mui/joy";
 import { CardContent } from "@mui/joy";
 import { useRouter } from "next/navigation";
+import { CircularProgress } from "@mui/joy";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -15,13 +16,17 @@ const SignInSchema = Yup.object().shape({
 export default function SignIn() {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isLoading, setLoading] = useState(false)
   const router = useRouter()
 
   async function signIn(formData) {
+    setLoading(true)
     const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
     });
+
+    setLoading(true)
 
     if (error) {
       setErrorMsg(error.message);
@@ -75,7 +80,7 @@ export default function SignIn() {
               ) : null}
 
               <button className="my-5 bg-green-400 p-2 rounded font-bold">
-                Log in
+                {isLoading ? <CircularProgress/> : "Log in"}
               </button>
             </Form>
           )}

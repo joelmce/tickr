@@ -7,11 +7,11 @@ export default function Assets() {
   const [selectedTicker, setSelectedTicker] = useState(null);
 
   useEffect(() => {
-    fetchTopCoins().then((prices) => {
-      setCoinPrices(prices);
+    fetchTopCoins().then((topCoinPrices) => {
+      setCoinPrices(topCoinPrices);
     });
   }, []);
-
+  
   const topCoins = Object.entries(coinPrices);
 
   return (
@@ -32,7 +32,7 @@ export default function Assets() {
                   {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "USD",
-                  }).format(coinData.current_price)}
+                  }).format(coinPrices[ticker].current_price)}
                 </p>
               </div>
             );

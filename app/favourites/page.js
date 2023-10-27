@@ -1,3 +1,6 @@
 export default function Favourites() {
-    return ("favourites page")
+    return (
+        <div>
+            </div>
+    )
 }

@@ -3,15 +3,12 @@ import ResponsiveGridLayout from "react-grid-layout";
 import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
 import { useEffect, useState } from "react";
-import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
-import { CircularProgress } from "@mui/joy";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { priceEmitter } from "@/utils/socket.js";
-import { ModeEdit } from "@mui/icons-material";
 import { DashboardHeader } from "./DashboardHeader";
 
-export default function Dashboard({ metadata }) {
+export default function Dashboard({ metadata, user }) {
   const originalLayout = [
     { i: "a", x: 0, y: 0, w: 1, h: 1 },
     { i: "b", x: 1, y: 0, w: 1, h: 1 },
@@ -88,7 +85,7 @@ export default function Dashboard({ metadata }) {
   return (
     <>
       <div className="mx-6">
-        <DashboardHeader metadata={metadata}/>
+        <DashboardHeader user={user} metadata={metadata}/>
       </div>
 
       <ResponsiveGridLayout
@@ -110,7 +107,6 @@ export default function Dashboard({ metadata }) {
           const { name, price_change_percentage_24h, total_volume } = coinData;
           
           const livePriceValue = livePrices[ticker].current_price;
-
 
           return (
             <div

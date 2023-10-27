@@ -21,17 +21,14 @@ function calculatePriceDiff(oldPrices, newPrices) {
 
 export default async function setupWebSocketConnections() {
   try {
-    // fetch top coins by marketcap
     const fetchedPrices = await fetchTopCoins();
     const top10Coins = Object.keys(fetchedPrices);
 
-    // open WS connection for each coin
     top10Coins.forEach((coin) => {
       const endpoint = `wss://stream.binance.com:9443/ws/${coin.toLowerCase()}usdt@ticker`;
       const socket = new WebSocket(endpoint);
       console.log("new socket opened");
 
-      // update price object on price change
       socket.onmessage = (event) => {
         const data = JSON.parse(event.data);
         if (data && data.c && !isNaN(data.c)) {
