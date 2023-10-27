@@ -3,10 +3,10 @@ import ResponsiveGridLayout from "react-grid-layout";
 import Creator from "./Creator";
 import Ticker from "../ticker/Ticker";
 import TickerChart from "../ticker/TickerChart";
-import { generateStockData } from "@/app/generateMockStockData";
 import { useEffect, useState } from "react";
 import AddToFavourite from "./AddToFavourite";
 import { fetchTopCoins } from "@/utils/fetchcoins";
+import { priceEmitter } from "@/utils/websocket.js";
 
 export default function Dashboard({ metadata }) {
   const originalLayout = [
@@ -21,16 +21,28 @@ export default function Dashboard({ metadata }) {
 
   const [layout, setLayout] = useState(originalLayout);
   const [coinPrices, setCoinPrices] = useState({});
+  const [livePrices, setLivePrices] = useState({});
 
   useEffect(() => {
-    fetchTopCoins().then((prices) => {
-      setCoinPrices(prices);
+    const handlePricesUpdate = (updatedPrices) => {
+      setLivePrices((prevPrices) => ({ ...prevPrices, ...updatedPrices }));
+    };
+
+    priceEmitter.on("pricesUpdated", handlePricesUpdate);
+
+    return () => {
+      priceEmitter.removeListener("pricesUpdated", handlePricesUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    fetchTopCoins().then((initialPrices) => {
+      setCoinPrices(initialPrices);
+      setLivePrices(initialPrices);
     });
   }, []);
 
   const topCoins = Object.entries(coinPrices);
-
-  const stockData = generateStockData();
 
   return (
     <>
@@ -57,14 +69,10 @@ export default function Dashboard({ metadata }) {
           const layoutItem = originalLayout[index];
           if (!layoutItem) return null;
 
-          const {
-            name,
-            current_price,
-            price_change_percentage_24h,
-            total_volume,
-          } = coinData;
+          const { name, price_change_percentage_24h, total_volume } = coinData;
 
-          console.log(topCoins);
+          console.log(livePrices[ticker].current_price);
+          const livePriceValue = livePrices[ticker].current_price;
 
           return (
             <div
@@ -77,7 +85,7 @@ export default function Dashboard({ metadata }) {
                 price={new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
-                }).format(current_price)}
+                }).format(livePriceValue)}
                 diff={price_change_percentage_24h.toFixed(2)}
                 volume={new Intl.NumberFormat("en-US", {
                   style: "currency",
