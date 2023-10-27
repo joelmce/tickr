@@ -23,7 +23,7 @@ export function DashboardHeader({ metadata, user }) {
                 <p className="block my-4 text-xl w-auto">{metadata.description}</p>
             </>}
             <span className="p-2 bg-gray text-slate-400 rounded">@{metadata.creator}</span>
-            <AddToFavourite />
+            <AddToFavourite/>
         </>
     )
 }

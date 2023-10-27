@@ -6,12 +6,16 @@ import { DialogTitle } from "@mui/material";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CircularProgress } from "@mui/joy";
+import { Alert } from "./Alert";
 
 export function DeleteConfirmationButton({ name, dashboard_id }) {
     const [open, setOpen] = useState(false);
+    const [loading, isLoading] = useState(false)
     const router = useRouter()
 
     const handleDelete = async() => {
+        isLoading(true)
         setOpen(false)
         const supabase = createClientComponentClient()
         const { error } = await supabase
@@ -19,8 +23,10 @@ export function DeleteConfirmationButton({ name, dashboard_id }) {
             .delete()
             .eq("dashboard_id", dashboard_id);
             if (error) console.log(error);
+        isLoading(false)
 
-            router.refresh();
+        
+        router.refresh();
     }
 
     return (
@@ -43,8 +49,8 @@ export function DeleteConfirmationButton({ name, dashboard_id }) {
                         Are you sure you want to delete {name}?
                     </DialogContent>
                     <DialogActions>
-                        <Button variant="solid" color="danger" onClick={handleDelete}>
-                            Delete
+                        <Button variant="solid" color="danger" onClick={handleDelete} disabled={loading ? true : false}>
+                            {loading ? <CircularProgress/> : "Delete"}
                         </Button>
                         <Button variant="plain" color="neutral" onClick={() => setOpen(false)}>
                             Cancel

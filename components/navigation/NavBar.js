@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import NavItem from "./NavItem";
 import Settings from "./Settings";
+import { redirect } from "next/navigation";
 
 export default function NavBar({ user }) {
   return (

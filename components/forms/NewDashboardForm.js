@@ -7,6 +7,7 @@ import { Field, Form, Formik } from "formik";
 import {  useRouter } from "next/navigation";
 import { useState } from "react";
 import * as Yup from "yup";
+import { CircularProgress } from "@mui/joy";
 
 const NewDashboardSchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -16,9 +17,11 @@ const NewDashboardSchema = Yup.object().shape({
 export default function NewDashboardForm() {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
+  const [loading, isLoading] = useState(false)
   const router = useRouter();
 
   async function newDashboard(formData) {
+    isLoading(true)
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -31,11 +34,14 @@ export default function NewDashboardForm() {
         creator: user.user_metadata.alias,
       })
       .select();
+    
+    
 
     if (error) {
       setErrorMsg(error.message);
     }
-
+    
+    isLoading(false)
     router.replace(`/dashboards/${data[0].dashboard_id}`);
   }
 
@@ -75,8 +81,9 @@ export default function NewDashboardForm() {
               variant="contained"
               type="submit"
               className="my-5 p-2 bg-green-700 rounded hover:bg-green-800"
+              disabled={loading ? true : false}
             >
-              Create Dashboard
+              {loading ? <CircularProgress/> : "Create"}
             </Button>
           </Form>
         )}

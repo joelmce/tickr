@@ -2,7 +2,7 @@ import Dashboards from "@/components/dashboard/Dashboards";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { supabase } from "@/supabase/supabaseClient";
+import { Alert } from "@/components/ui/Alert";
 
 export default async function Page() {
   const supabase = createServerComponentClient({ cookies });
