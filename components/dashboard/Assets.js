@@ -6,7 +6,7 @@ import TickerChart from "@/components/ticker/TickerChart";
 export default function Assets() {
   const [coinPrices, setCoinPrices] = useState({});
   const [selectedTicker, setSelectedTicker] = useState(null);
-  const [currentChart, setCurrentChart] = useState(null);
+  const [currentChart, setCurrentChart] = useState("BTCUSDT");
 
   useEffect(() => {
     fetchTopCoins().then((topCoinPrices) => {
@@ -33,7 +33,7 @@ export default function Assets() {
                 key={index}
                 onClick={() => {
                   setSelectedTicker(coinData);
-                  setCurrentChart(coinData.symbol);
+                  setCurrentChart(coinData.symbol.toUpperCase() + "USDT");
                 }}
               >
                 <p className="ticker-name">{coinData.name}</p>
@@ -87,7 +87,7 @@ export default function Assets() {
                 }).format(selectedTicker.total_volume)}
               </p>
               <div className="chart-placeholder bg-black mt-4 shadow-md h-72 rounded-lg">
-                <TickerChart ticker={currentChart + "USDT"} />
+                <TickerChart ticker={currentChart} />
               </div>
             </div>
           )}

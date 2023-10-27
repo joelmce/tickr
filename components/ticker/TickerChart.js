@@ -11,8 +11,6 @@ import { useEffect, useState } from "react";
 export default function TickerChart({ ticker, bias }) {
   const [historicalData, setHistoricalData] = useState([]);
 
-  ticker = ticker.toUpperCase();
-
   const fetchData = async () => {
     try {
       const interval = "1h";
@@ -38,7 +36,7 @@ export default function TickerChart({ ticker, bias }) {
     return () => {
       clearInterval(updateInterval);
     };
-  }, []);
+  }, [ticker]);
 
   const chartData = {
     labels: historicalData.map((candle) =>
