@@ -11,17 +11,18 @@ export default function DashboardItem({ metadata }) {
   };
 
   return (
-    <li
-      key={id}
-      className="list-none rounded border border-white p-4"
-      
-    >
+    <li key={id} className="list-none rounded border border-white p-4">
       <h3 className="font-extrabold">{name}</h3>
-      <p>{description}</p>
-      <Button color="success" variant="outlined" onClick={goToDashboard}>
+      <p className="p-1">{description}</p>
+      <Button
+        className="mr-2"
+        color="success"
+        variant="outlined"
+        onClick={goToDashboard}
+      >
         View
       </Button>
-      <DeleteConfirmationButton name={name} dashboard_id={dashboard_id}/>
+      <DeleteConfirmationButton name={name} dashboard_id={dashboard_id} />
     </li>
   );
 }

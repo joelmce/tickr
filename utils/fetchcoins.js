@@ -46,7 +46,7 @@ async function fetchTopCoins() {
     .filter(
       (coin) => !["steth", "usdt", "usdc", "tusd", "dai"].includes(coin.symbol),
     )
-    .slice(0, 13)
+    .slice(0, 10)
     .forEach((coin) => {
       fetchedPrices[coin.symbol] = {
         market_cap: coin.market_cap,
