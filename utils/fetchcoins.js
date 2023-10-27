@@ -10,7 +10,7 @@ async function fetchCoins(tickers) {
         order: "market_cap_desc",
         sparkline: false,
       },
-    },
+    }
   );
 
   const fetchedPrices = [];
@@ -22,11 +22,10 @@ async function fetchCoins(tickers) {
       name: coin.name,
       current_price: coin.current_price,
       price_change_percentage_24h: coin.price_change_percentage_24h,
-      total_volume: coin.total_volume
-    })
-  })
+      total_volume: coin.total_volume,
+    });
+  });
 
-  console.log("fetched ALL coins", fetchedPrices);
   return fetchedPrices;
 }
 
@@ -39,13 +38,13 @@ async function fetchTopCoins() {
         order: "market_cap_desc",
         sparkline: false,
       },
-    },
+    }
   );
 
   const fetchedPrices = {};
   response.data
     .filter(
-      (coin) => !["steth", "usdt", "usdc", "tusd", "dai"].includes(coin.symbol),
+      (coin) => !["steth", "usdt", "usdc", "tusd", "dai"].includes(coin.symbol)
     )
     .slice(0, 20)
     .forEach((coin) => {
