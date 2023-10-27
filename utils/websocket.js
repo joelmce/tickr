@@ -42,23 +42,6 @@ async function setupWebSocketConnections() {
   }
 }
 
-function cleanupWebSockets() {
-  sockets.forEach((socket) => {
-    socket.close();
-  });
-  sockets.length = 0;
-}
-
 setupWebSocketConnections();
-
-process.on("exit", cleanupWebSockets);
-process.on("SIGINT", () => {
-  cleanupWebSockets();
-  process.exit(0);
-});
-process.on("SIGTERM", () => {
-  cleanupWebSockets();
-  process.exit(0);
-});
 
 export { prices, priceEmitter };
