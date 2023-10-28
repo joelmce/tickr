@@ -39,6 +39,7 @@ export default function SortableTest({ ticker }) {
         <TickerChart
           ticker={`${symbol.toUpperCase()}USDT`}
           bias={ticker.price_change_percentage_24h.toFixed(2)}
+          itemType="tile"
         />
       </Ticker>
     </div>

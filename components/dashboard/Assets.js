@@ -87,7 +87,7 @@ export default function Assets() {
                 }).format(selectedTicker.total_volume)}
               </p>
               <div className="chart-placeholder bg-black mt-4 shadow-md h-72 rounded-lg">
-                <TickerChart ticker={currentChart} />
+                <TickerChart ticker={currentChart} itemType="assets" />
               </div>
             </div>
           )}

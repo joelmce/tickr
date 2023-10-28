@@ -130,7 +130,7 @@ form {
 
 }
 
-.placeholder-chart {
+.chart-placeholder {
   display: flex;
   flex-direction: column;
 }

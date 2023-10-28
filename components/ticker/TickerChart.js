@@ -3,12 +3,7 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 
-/**
- *
- * @param ticker: 'BTCUSDT'
- * @returns
- */
-export default function TickerChart({ ticker, bias }) {
+export default function TickerChart({ ticker, bias, itemType }) {
   const [historicalData, setHistoricalData] = useState([]);
 
   const fetchData = async () => {
@@ -78,8 +73,15 @@ export default function TickerChart({ ticker, bias }) {
     },
   };
 
+  let containerClassName = "h-16";
+  if (itemType === "tile") {
+    containerClassName = "h-16";
+  } else if (itemType === "assets") {
+    containerClassName = "ticker-chart";
+  }
+
   return (
-    <div className="ticker-chart h-16">
+    <div className={containerClassName}>
       <Line data={chartData} options={chartOptions} />
     </div>
   );
