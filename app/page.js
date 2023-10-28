@@ -16,20 +16,20 @@ export default function Home() {
         <section className="flex gap-10 mt-10">
           <div className="rounded border p-4 bg-gradient-to-b from-[#0d0c0b] to-slate-900 border-[#164914] shadow-md opacity-80 cursor-pointer">
             <Ticker
-              ticker="Solana"
+              ticker="Bitcoin"
               diff={"+5.2%"}
               price={"$33,020"}
-              volume={"$2,320,331.00"}
+              volume={"$22,320,331.00"}
             >
               <TickerChart ticker="BTCUSDT" bias="+5.2" />
             </Ticker>
           </div>
           <div className="rounded border p-4 bg-gradient-to-b from-[#0d0c0b] to-slate-900 border-[#164914] shadow-md opacity-80 cursor-pointer">
             <Ticker
-              ticker="Bitcoin"
+              ticker="Solana"
               diff={"+4.33"}
               price={"$25.45"}
-              volume="$3,001,322.00"
+              volume="$9,001,322.00"
             >
               <TickerChart ticker="SOLUSDT" bias="+4.33" />
             </Ticker>
