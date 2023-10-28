@@ -79,7 +79,7 @@ export default function TickerChart({ ticker, bias }) {
   };
 
   return (
-    <div className="h-16">
+    <div className="ticker-chart h-16">
       <Line data={chartData} options={chartOptions} />
     </div>
   );

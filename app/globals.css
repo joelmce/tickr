@@ -122,3 +122,15 @@ form {
   width: 400px;
 
 }
+
+.ticker-chart {
+  justify-content: center;
+  height: 100%;
+  padding: 10px;
+
+}
+
+.placeholder-chart {
+  display: flex;
+  flex-direction: column;
+}
