@@ -31,9 +31,6 @@ const Grid = ({ columns, children }) => {
 
 export default function Dashboard({ metadata, user }) {
   const [items, setItems] = useState([]);
-  const [storedTickers, updateStoredTickers] = useState([]);
-  const [finalItems, setFinalItems] = useState([]);
-  const [coinPrices, setCoinPrices] = useState({});
   const [livePrices, setLivePrices] = useState({});
 
   const supabase = createClientComponentClient();
@@ -51,19 +48,6 @@ export default function Dashboard({ metadata, user }) {
       });
     };
     getTickers();
-
-    // fetchTopCoins().then((initialPrices) => {
-    //   const filteredPrices = Object.keys(initialPrices)
-    //   .filter(ticker => chosenTickers.includes(ticker))
-    //   .reduce((acc, curr) => {
-    //     acc[curr] = initialPrices[curr];
-    //     return acc;
-    //   }, {});
-    //   console.log(filteredPrices)
-    //   setFinalItems(filteredPrices);
-    //   setCoinPrices(initialPrices);
-    //   setLivePrices(initialPrices);
-    // });
 
     const handlePricesUpdate = (updatedPrices) => {
       setLivePrices((prevPrices) => ({ ...prevPrices, ...updatedPrices }));
